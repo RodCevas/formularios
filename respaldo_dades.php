@@ -1,5 +1,4 @@
 <?php
-
 require("../../../../../recursos/php/constants.inc");
 require("../../../../../recursos/php/funciones.php");
 require("../../funciones_ti.php");
@@ -9,8 +8,6 @@ $new_postg = conectabdpgsql(BD_SERVIDOR_POSTGES, BD_PORT_POSTGES, BD_NOM_POSTGES
 
 $usuario = str_replace("@BSA.ES", '', $_SERVER['REMOTE_USER']);
 $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
-$nom_usu 	= $usudata[0]['givenname'][0];
-$cognom_usu = $usudata[0]['sn'][0];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -49,7 +46,7 @@ $cognom_usu = $usudata[0]['sn'][0];
 				</div>
 
 				<div class="col-lg-2 d-flex justify-content-center align-items-center mt-3">
-					<h6>Telef./Ext</h6>
+					<h6>Telef./Ext *</h6>
 				</div>
 				<div class="col-lg-4 mt-3">
 					<input type="tel" class="form-control" id="tel" placeholder="Telef./Ext" minlength="5" maxlength="9">
@@ -83,61 +80,73 @@ $cognom_usu = $usudata[0]['sn'][0];
 			</div>
 
 			<div class="row bg-light m-5 p-5 rounded mostrar d-none">
+				<div class="col-lg-12 fw-bold text-danger text-center recerca d-none">“Abans de cursar aquesta sol·licitud, recorda que cal haver presentat el protocol d'estudi al Comitè de Recerca”</div>
 				<div class="col-lg-12">
 					<div class="row my-5">
 						<div class="col-lg-2 d-flex justify-content-center align-items-center">
-							<h6>Tria el centre</h6>
+							<h6>Tria el centre *</h6>
 						</div>
 						<div class="col-lg-4">
 							<select class="form-select" aria-label="Default select example">
 								<option value="" selected hidden>Centre</option>
-								<option value="1">Uno</option>
-								<option value="2">Dos</option>
-								<option value="3">Tres</option>
+								<?php
+										for ($i=1;$i<count($centres_SAP);$i++){
+											echo "<option value='".$centres_SAP[$i]["CMB_UP"]."'>".$centres_SAP[$i]["DESCRIPCION"]."</option>";
+										}
+									?>
 							</select>
 						</div>
 
 						<div class="col-lg-2 d-flex justify-content-center align-items-center">
-							<h6 class="gestioInterna d-none">Tria el tipus de justificació</h6>
-							<h6 class="recerca d-none">Per</h6>
+							<h6 class="gestioInterna d-none">Tria el tipus de justificació *</h6>
+							<h6 class="recerca d-none">Per *</h6>
 						</div>
 						<div class="col-lg-4">
 							<select class="form-select gestioInterna d-none" aria-label="Default select example">
 								<option value="" selected hidden>Justificació</option>
-								<option value="1">Uno</option>
-								<option value="2">Dos</option>
-								<option value="3">Tres</option>
+								<option value="Gestió_interna_del_Servei_Unitat">Gestió interna del Servei / Unitat</option>
+								<option value="Pla_de_Salut_o_similars">Pla de Salut o similars</option>
+								<option value="Resposta_a_objectius">Resposta a objectius</option>
+								<option value="IQF">IQF</option>
+								<option value="Altres">Altres</option>
 							</select>
 							<select class="form-select recerca d-none" aria-label="Default select example">
 								<option value="" selected hidden>Justificació</option>
-								<option value="1">Uno</option>
-								<option value="2">Dos</option>
-								<option value="3">Tres</option>
+								<option value="Publicació_a_congressos">Publicació a congressos</option>
+								<option value="Publicació_a_revistes">Publicació a revistes</option>
+								<option value="Per_documentació">Per documentació (tesis, tesines)</option>
 							</select>
 						</div>
 
 					</div>
 					<div class="row my-5">
 						<div class="col-lg-2 d-flex justify-content-center align-items-center">
-							<h6>Tria el servei</h6>
+							<h6>Tria el servei *</h6>
 						</div>
 						<div class="col-lg-4">
 							<select class="form-select" aria-label="Default select example">
 								<option value="" selected hidden>Servei</option>
-								<option value="1">Uno</option>
-								<option value="2">Dos</option>
-								<option value="3">Tres</option>
+								<?php
+										for ($i=1;$i<count($serveis_SAP);$i++){
+											echo "<option value='".$serveis_SAP[$i]["ORGID"]."'>".$serveis_SAP[$i]["ORGNA"]."</option>";
+										}
+									?>
 							</select>
 						</div>
 						<div class="col-lg-2 d-flex justify-content-center align-items-center">
-							<h6>Periodicitat</h6>
+							<h6>Periodicitat *</h6>
 						</div>
 						<div class="col-lg-4">
 							<select class="form-select" aria-label="Default select example">
 								<option value="" selected hidden>Periodicitat</option>
-								<option value="1">Uno</option>
-								<option value="2">Dos</option>
-								<option value="3">Tres</option>
+								<option value="Només_ara">Només ara</option>
+								<option value="Setmanal">Setmanal</option>
+								<option value="Quinzenal">Quinzenal</option>
+								<option value="Mensual">Mensual</option>
+								<option value="Trimestral">Trimestral</option>
+								<option value="Quadrimestral">Quadrimestral</option>
+								<option value="Semestral">Semestral</option>
+								<option value="Anual">Anual</option>
 							</select>
 						</div>
 					</div>
@@ -147,7 +156,7 @@ $cognom_usu = $usudata[0]['sn'][0];
 					<div class="row">
 						<div class="col-lg-4 d-flex justify-content-center align-items-center">
 							<label for="publicar" class="form-label">
-								<h6>A on ho penses publicar?</h6>
+								<h6>A on ho penses publicar? *</h6>
 							</label>
 						</div>
 						<div class="col-lg-8">
@@ -159,7 +168,7 @@ $cognom_usu = $usudata[0]['sn'][0];
 				<div class="col-lg-12 my-3 mostrar d-none">
 					<div class="row">
 						<div class="col-lg-12 text-center my-3">
-							<h6>Especifica de quina aplicació necessites les dades. Poden haver-hi múltiples seleccions.</h6>
+							<h6>Especifica de quina aplicació necessites les dades. Poden haver-hi múltiples seleccions. *</h6>
 						</div>
 						<div class="row d-flex justify-content-center align-items-center my-3">
 							<div class="col-md-2 form-check">
@@ -232,34 +241,40 @@ $cognom_usu = $usudata[0]['sn'][0];
 			<div class="row bg-light m-5 p-5 rounded mostrar d-none">
 				<div class="col-lg-12 my-3">
 					<label for="necessites" class="form-label">
-						<h6>Indica'ns que necessites</h6>
+						<h6>Indica'ns que necessites *</h6>
 					</label>
 					<textarea class="form-control" id="necessites" rows="1"></textarea>
 				</div>
 				<div class="col-lg-6 my-3">
 					<label for="camps" class="form-label">
-						<h6>Indica'ns quins camps necessites</h6>
+						<h6>Indica'ns quins camps necessites *</h6>
 					</label>
 					<textarea class="form-control" id="camps" rows="1"></textarea>
 				</div>
 				<div class="col-lg-6 my-3">
 					<label for="filtres" class="form-label">
-						<h6>Indica'ns quins filtres necessites</h6>
+						<h6>Indica'ns quins filtres necessites *</h6>
 					</label>
 					<textarea class="form-control" id="filtres" rows="1"></textarea>
 				</div>
-				<div class="col-lg-3 my-3">
-					<p>Si ho necessites, fes una captura de pantalla, guarda-la en un arxiu i adjunta-la aquí</p>
+				<div class="col-lg-6">
+					<div class="row">
+						<div class="col-lg-12 my-3">
+							<p>Si ho necessites, fes una captura de pantalla, guarda-la en un arxiu i adjunta-la aquí</p>
+						</div>
+						<div class="col-lg-12 my-3">
+							<input id="bfupload-b3" name="bfupload-b3[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
+						</div>
+					</div>
 				</div>
-				<div class="col-lg-3 my-3">
-					<input id="bfupload-b3" name="bfupload-b3[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
-				</div>
+
+
 				<div class="col-lg-6">
 					<div class="row recerca d-none">
-						<div class="col-lg-3 my-3 d-flex justify-content-end align-items-center">
-							<label for="fecha">Data de termini per presentar el resum?</label>
+						<div class="col-lg-12 my-3">
+							<label for="fecha">Data de termini per presentar el resum? *</label>
 						</div>
-						<div class="col-lg-3 my-3 d-flex justify-content-end align-items-center">
+						<div class="col-lg-12 my-3">
 							<input type="date" id="fecha" name="fecha">
 						</div>
 					</div>
@@ -337,23 +352,6 @@ $cognom_usu = $usudata[0]['sn'][0];
 				});
 			}
 		}
-		/* 			gestioInterna.forEach((item, index) => {
-						item.classList.remove("d-none")
-						console.log(item.classList);
-					});
-					recerca.forEach((item, index) => {
-						item.classList.add("d-none")
-					}); */
-
-
-
-
-		/* 		function mostrarRecerca() {
-					var gestioInterna = document.querySelectorAll(".gestioInterna");
-					var recerca = document.querySelectorAll(".recerca");
-					gestioInterna.classList.add("d-none");
-					recerca.classList.remove("d-none");
-				} */
 	</script>
 </body>
 </script>
