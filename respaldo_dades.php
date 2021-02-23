@@ -8,6 +8,25 @@ $new_postg = conectabdpgsql(BD_SERVIDOR_POSTGES, BD_PORT_POSTGES, BD_NOM_POSTGES
 
 $usuario = str_replace("@BSA.ES", '', $_SERVER['REMOTE_USER']);
 $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
+
+/* $nomCognom = $_POST['nomCognom']; */
+/* $email = $_POST['email'];
+$tel = $_POST['tel'];
+$sollicitudExterna = $_POST['sollicitudExterna'];
+$gestioInterna = $_POST['gestioInternav'];
+$recerca = $_POST['recerca'];
+$centre = $_POST['centre'];
+$justificacio = $_POST['justificacio'];
+$per = $_POST['per'];
+$servei = $_POST['servei'];
+$periodicitat = $_POST['periodicitat'];
+$publicar = $_POST['publicar'];
+$checkArr[] = $_POST['checkArr[]'];
+$necessites = $_POST['necessites'];
+$camps = $_POST['camps'];
+$filtres = $_POST['filtres'];
+$bfupload[] = $_POST['bfupload[]'];
+$fecha = $_POST['fecha']; */
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,21 +39,95 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 	<link href="../../../../recursos/css/formulari_ti.css" type='text/css' rel='stylesheet'>
 	<title><?php echo $titulo_web; ?></title>
+	<style>
+		.invisible {
+			visibility: hidden !important;
+		}
+	</style>
 </head>
 
 <body>
 	<div class="container-fluid">
 		<?php require('../../cabecera.php'); ?>
 
-		<form>
+		<div id="resumen" class="row justify-content-center bg-light m-5 p-5 rounded d-none">
+			<div class="col-lg-8">
+				<div class="row">
+					<div class="col-lg-4">Nom_Cognom1_Cognom2:</div>
+					<div class="col-lg-8"><p id="nomCognomPopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Email:</div>
+					<div class="col-lg-8"><p id="emailPopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Tel:</div>
+					<div class="col-lg-8"><p id="telPopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Sollicitud Externa:</div>
+					<div class="col-lg-8"><p id="sollicitudExternaPopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Centre:</div>
+					<div class="col-lg-8"><p id="centrePopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Justificacio:</div>
+					<div class="col-lg-8"><p id="justificacioPopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Per:</div>
+					<div class="col-lg-8"><p id="perPopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Servei:</div>
+					<div class="col-lg-8"><p id="serveiPopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Periodicitat:</div>
+					<div class="col-lg-8"><p id="periodicitatPopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Publicar:</div>
+					<div class="col-lg-8"><p id="publicarPopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Necessites:</div>
+					<div class="col-lg-8"><p id="necessitesPopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Camps:</div>
+					<div class="col-lg-8"><p id="campsPopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Filtres:</div>
+					<div class="col-lg-8"><p id="filtresPopulated"></p></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Fecha:</div>
+					<div class="col-lg-8"><p id="fechaPopulated"></p></div>
+				</div>
+			</div>
+		</div>
+
+		<form method="POST" action="sist_informacio_resum.php" id="sistInformacioForm">
+
+			<div id="alert-error" class="row my-5 justify-content-center d-none">
+				<div class="col-lg-8 p-3 fw-bold text-center bg-danger rounded">
+					Si us plau ompli els camps obligatoris.
+				</div>
+			</div>
 
 			<div class="row bg-light m-5 p-5 rounded">
 				<div class="col-lg-2 d-flex justify-content-center align-items-center">
 					<h6>Hola!</h6>
 				</div>
 				<div class="col-lg-4">
-					<input type="text" class="form-control" id="nom-cognom" placeholder="Nom_Cognom1_Cognom2" value="<?php echo $nom_usu . " " . $cognom_usu ?>" disabled>
-					<input type="email" class="form-control" id="email" placeholder="usuari@bsa.cat" value="<?php echo $usuario; ?>@bsa.cat" disabled>
+					<input name="nomCognom" type="text" class="form-control" id="nomCognom" placeholder="Nom_Cognom1_Cognom2" value="<?php echo $nom_usu . " " . $cognom_usu ?>" disabled>
+
+					<input name="email" type="email" class="form-control" id="email" placeholder="usuari@bsa.cat" value="<?php echo $usuario; ?>@bsa.cat" disabled>
+
 				</div>
 				<div class="col-lg-6 d-flex align-items-center">
 					<div class="form-check">
@@ -49,11 +142,14 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 					<h6>Telef./Ext *</h6>
 				</div>
 				<div class="col-lg-4 mt-3">
-					<input type="tel" class="form-control" id="tel" placeholder="Telef./Ext" minlength="5" maxlength="9">
+					<input name="tel" type="tel" class="form-control" id="tel" placeholder="Telef./Ext" minlength="5" maxlength="9">
+					<div class="text-danger d-none">
+						Si us plau entre un valor
+					</div>
 				</div>
 				<div class="col-lg-6 d-flex align-items-center mt-3">
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value="sollicitudExterna" id="solExt">
+						<input name="sollicitudExterna" class="form-check-input" type="checkbox" value="sollicitudExterna" id="solExt">
 						<label class="form-check-label" for="solExt">
 							Si és una sol·licitud externa, si us plau, fes click aquí
 						</label>
@@ -62,7 +158,6 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 			</div>
 
 			<div class="row bg-light m-5 p-5 rounded">
-
 				<div class="col-lg-12 text-center">
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="gestioInterna" value="gestioInterna" onclick="mostrarOcultar()">
@@ -79,22 +174,25 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 				</div>
 			</div>
 
-			<div class="row bg-light m-5 p-5 rounded mostrar d-none">
-				<div class="col-lg-12 fw-bold text-danger text-center recerca d-none">“Abans de cursar aquesta sol·licitud, recorda que cal haver presentat el protocol d'estudi al Comitè de Recerca”</div>
+			<div class="row bg-light m-5 p-5 rounded mostrar d-none invisible">
+				<div class="col-lg-12 fw-bold text-danger text-center recerca d-none invisible">“Abans de cursar aquesta sol·licitud, recorda que cal haver presentat el protocol d'estudi al Comitè de Recerca”</div>
 				<div class="col-lg-12">
 					<div class="row my-5">
 						<div class="col-lg-2 d-flex justify-content-center align-items-center">
 							<h6>Tria el centre *</h6>
 						</div>
 						<div class="col-lg-4">
-							<select class="form-select" aria-label="Default select example">
+							<select name="centre" id="centre" class="form-select" aria-label="Default select example">
 								<option value="" selected hidden>Centre</option>
 								<?php
-										for ($i=1;$i<count($centres_SAP);$i++){
-											echo "<option value='".$centres_SAP[$i]["CMB_UP"]."'>".$centres_SAP[$i]["DESCRIPCION"]."</option>";
-										}
-									?>
+								for ($i = 1; $i < count($centres_SAP); $i++) {
+									echo "<option value='" . $centres_SAP[$i]["CMB_UP"] . "'>" . $centres_SAP[$i]["DESCRIPCION"] . "</option>";
+								}
+								?>
 							</select>
+							<div class="text-danger d-none">
+								Si us plau entre un valor
+							</div>
 						</div>
 
 						<div class="col-lg-2 d-flex justify-content-center align-items-center">
@@ -102,7 +200,7 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 							<h6 class="recerca d-none">Per *</h6>
 						</div>
 						<div class="col-lg-4">
-							<select class="form-select gestioInterna d-none" aria-label="Default select example">
+							<select name="justificacio" id="justificacio" class="form-select gestioInterna d-none invisible" aria-label="Default select example">
 								<option value="" selected hidden>Justificació</option>
 								<option value="Gestió_interna_del_Servei_Unitat">Gestió interna del Servei / Unitat</option>
 								<option value="Pla_de_Salut_o_similars">Pla de Salut o similars</option>
@@ -110,12 +208,18 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 								<option value="IQF">IQF</option>
 								<option value="Altres">Altres</option>
 							</select>
-							<select class="form-select recerca d-none" aria-label="Default select example">
-								<option value="" selected hidden>Justificació</option>
+							<div id="gestioInterna-error" class="text-danger d-none">
+								Si us plau entre un valor
+							</div>
+							<select name="per" id="per" class="form-select recerca d-none invisible" aria-label="Default select example">
+								<option value="" selected hidden>Per</option>
 								<option value="Publicació_a_congressos">Publicació a congressos</option>
 								<option value="Publicació_a_revistes">Publicació a revistes</option>
 								<option value="Per_documentació">Per documentació (tesis, tesines)</option>
 							</select>
+							<div id="recerca-error" class="text-danger d-none">
+								Si us plau entre un valor
+							</div>
 						</div>
 
 					</div>
@@ -124,20 +228,23 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 							<h6>Tria el servei *</h6>
 						</div>
 						<div class="col-lg-4">
-							<select class="form-select" aria-label="Default select example">
+							<select name="servei" id="servei" class="form-select" aria-label="Default select example">
 								<option value="" selected hidden>Servei</option>
 								<?php
-										for ($i=1;$i<count($serveis_SAP);$i++){
-											echo "<option value='".$serveis_SAP[$i]["ORGID"]."'>".$serveis_SAP[$i]["ORGNA"]."</option>";
-										}
-									?>
+								for ($i = 1; $i < count($serveis_SAP); $i++) {
+									echo "<option value='" . $serveis_SAP[$i]["ORGID"] . "'>" . $serveis_SAP[$i]["ORGNA"] . "</option>";
+								}
+								?>
 							</select>
+							<div class="text-danger d-none">
+								Si us plau entre un valor
+							</div>
 						</div>
 						<div class="col-lg-2 d-flex justify-content-center align-items-center">
 							<h6>Periodicitat *</h6>
 						</div>
 						<div class="col-lg-4">
-							<select class="form-select" aria-label="Default select example">
+							<select name="periodicitat" id="periodicitat" class="form-select" aria-label="Default select example">
 								<option value="" selected hidden>Periodicitat</option>
 								<option value="Només_ara">Només ara</option>
 								<option value="Setmanal">Setmanal</option>
@@ -148,11 +255,14 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 								<option value="Semestral">Semestral</option>
 								<option value="Anual">Anual</option>
 							</select>
+							<div class="text-danger d-none">
+								Si us plau entre un valor
+							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="col-lg-12 my-3 recerca d-none">
+				<div class="col-lg-12 my-3 recerca d-none invisible">
 					<div class="row">
 						<div class="col-lg-4 d-flex justify-content-center align-items-center">
 							<label for="publicar" class="form-label">
@@ -160,43 +270,46 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 							</label>
 						</div>
 						<div class="col-lg-8">
-							<textarea class="form-control" id="publicar" rows="1"></textarea>
+							<textarea name="publicar" class="form-control" id="publicar" rows="1"></textarea>
+							<div class="text-danger d-none">
+								Si us plau entre un valor
+							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="col-lg-12 my-3 mostrar d-none">
+				<div class="col-lg-12 my-3 mostrar d-none invisible">
 					<div class="row">
 						<div class="col-lg-12 text-center my-3">
 							<h6>Especifica de quina aplicació necessites les dades. Poden haver-hi múltiples seleccions. *</h6>
 						</div>
 						<div class="row d-flex justify-content-center align-items-center my-3">
 							<div class="col-md-2 form-check">
-								<input class="form-check-input" type="checkbox" value="FormularisWeb" id="FormularisWeb">
+								<input name="checkArr" class="form-check-input app" type="checkbox" value="FormularisWeb" id="FormularisWeb">
 								<label class="form-check-label" for="FormularisWeb">
 									Formularis web
 								</label>
 							</div>
 							<div class="col-md-2 form-check">
-								<input class="form-check-input" type="checkbox" value="gesdohc" id="gesdohc">
+								<input name="checkArr" class="form-check-input app" type="checkbox" value="gesdohc" id="gesdohc">
 								<label class="form-check-label" for="gesdohc">
 									Gesdohc
 								</label>
 							</div>
 							<div class="col-md-2 form-check">
-								<input class="form-check-input" type="checkbox" value="ecap" id="ecap">
+								<input name="checkArr" class="form-check-input app" type="checkbox" value="ecap" id="ecap">
 								<label class="form-check-label" for="ecap">
 									Ecap
 								</label>
 							</div>
 							<div class="col-md-2 form-check">
-								<input class="form-check-input" type="checkbox" value="tesis" id="tesis">
+								<input name="checkArr" class="form-check-input app" type="checkbox" value="tesis" id="tesis">
 								<label class="form-check-label" for="tesis">
 									Tesis
 								</label>
 							</div>
 							<div class="col-md-2 form-check">
-								<input class="form-check-input" type="checkbox" value="omi" id="omi">
+								<input name="checkArr" class="form-check-input app" type="checkbox" value="omi" id="omi">
 								<label class="form-check-label" for="omi">
 									Omi
 								</label>
@@ -204,58 +317,72 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 						</div>
 						<div class="row d-flex justify-content-center align-items-center my-3">
 							<div class="col-md-2 form-check">
-								<input class="form-check-input" type="checkbox" value="silicon" id="silicon">
+								<input name="checkArr" class="form-check-input app" type="checkbox" value="silicon" id="silicon">
 								<label class="form-check-label" for="silicon">
 									Silicon
 								</label>
 							</div>
 							<div class="col-md-2 form-check">
-								<input class="form-check-input" type="checkbox" value="taonet" id="taonet">
+								<input name="checkArr" class="form-check-input app" type="checkbox" value="taonet" id="taonet">
 								<label class="form-check-label" for="taonet">
 									Taonet
 								</label>
 							</div>
 							<div class="col-md-2 form-check">
-								<input class="form-check-input" type="checkbox" value="sisdi" id="sisdi">
+								<input name="checkArr" class="form-check-input app" type="checkbox" value="sisdi" id="sisdi">
 								<label class="form-check-label" for="sisdi">
 									Sisdi
 								</label>
 							</div>
 							<div class="col-md-2 form-check">
-								<input class="form-check-input" type="checkbox" value="sap" id="sap">
+								<input name="checkArr" class="form-check-input app" type="checkbox" value="sap" id="sap">
 								<label class="form-check-label" for="sap">
 									SAP
 								</label>
 							</div>
 							<div class="col-md-2 form-check">
-								<input class="form-check-input" type="checkbox" value="altres" id="altres">
+								<input name="checkArr" class="form-check-input app" type="checkbox" value="altres" id="altres">
 								<label class="form-check-label" for="altres">
 									Altres
 								</label>
+							</div>
+						</div>
+						<div class="col-lg-12 text-center">
+							<div id="app-error" class="text-danger d-none">
+								Si us plau seleccioneu un camp.
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="row bg-light m-5 p-5 rounded mostrar d-none">
+			<div class="row bg-light m-5 p-5 rounded mostrar d-none invisible">
 				<div class="col-lg-12 my-3">
 					<label for="necessites" class="form-label">
 						<h6>Indica'ns que necessites *</h6>
 					</label>
-					<textarea class="form-control" id="necessites" rows="1"></textarea>
+					<textarea name="necessites" class="form-control" id="necessites" rows="1"></textarea>
+					<div class="text-danger d-none">
+						Si us plau entre un valor
+					</div>
 				</div>
 				<div class="col-lg-6 my-3">
 					<label for="camps" class="form-label">
 						<h6>Indica'ns quins camps necessites *</h6>
 					</label>
-					<textarea class="form-control" id="camps" rows="1"></textarea>
+					<textarea name="camps" class="form-control" id="camps" rows="1"></textarea>
+					<div class="text-danger d-none">
+						Si us plau entre un valor
+					</div>
 				</div>
 				<div class="col-lg-6 my-3">
 					<label for="filtres" class="form-label">
 						<h6>Indica'ns quins filtres necessites *</h6>
 					</label>
-					<textarea class="form-control" id="filtres" rows="1"></textarea>
+					<textarea name="filtres" class="form-control" id="filtres" rows="1"></textarea>
+					<div class="text-danger d-none">
+						Si us plau entre un valor
+					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="row">
@@ -263,19 +390,22 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 							<p>Si ho necessites, fes una captura de pantalla, guarda-la en un arxiu i adjunta-la aquí</p>
 						</div>
 						<div class="col-lg-12 my-3">
-							<input id="bfupload-b3" name="bfupload-b3[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
+							<input id="bfupload" name="bfupload[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
 						</div>
 					</div>
 				</div>
 
 
 				<div class="col-lg-6">
-					<div class="row recerca d-none">
+					<div class="row recerca d-none invisible">
 						<div class="col-lg-12 my-3">
 							<label for="fecha">Data de termini per presentar el resum? *</label>
 						</div>
 						<div class="col-lg-12 my-3">
 							<input type="date" id="fecha" name="fecha">
+							<div class="text-danger d-none">
+								Si us plau entre un valor
+							</div>
 						</div>
 					</div>
 				</div>
@@ -285,13 +415,13 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 
 			<div class="row bg-light m-5 p-5 rounded">
 				<div class="col-md-4 text-center">
-					<button type="button" class="btn btn-danger px-4 m-2">Sortir</button>
+					<button type="button" class="btn btn-danger px-4 m-2" onclick="javascript:window.close();">Sortir</button>
 				</div>
 				<div class="col-md-4 text-center">
-					<button type="button" class="btn btn-secondary px-4 m-2">Enrere</button>
+					<button type="button" class="btn btn-secondary px-4 m-2" onclick="javascript:window.history.back();">Enrere</button>
 				</div>
 				<div class="col-md-4 text-center">
-					<button type="button" class="btn btn-primary px-4 m-2">Continuar</button>
+					<button type="button" class="btn btn-primary px-4 m-2" onclick="validacion()">Continuar</button>
 				</div>
 			</div>
 
@@ -306,51 +436,232 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 	<!-- JavaScript Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 	<script>
+		var sistInformacioForm = document.getElementById("sistInformacioForm");
+
+		var resumen = document.getElementById("resumen");
+
+		var alertError = document.getElementById("alert-error");
+		var gestioInternaError = document.getElementById("gestioInterna-error");
+		var recercaError = document.getElementById("recerca-error");
+		var appError = document.getElementById("app-error");
+
+		var nomCognom = document.getElementById("nomCognom");
+		var email = document.getElementById("email");
+		var gestioInterna = document.getElementById("gestioInterna");
+		var recerca = document.getElementById("recerca");
+		var tel = document.getElementById("tel");
+		var centre = document.getElementById("centre");
+		var justificacio = document.getElementById("justificacio");
+		var per = document.getElementById("per");
+		var servei = document.getElementById("servei");
+		var periodicitat = document.getElementById("periodicitat");
+		var publicar = document.getElementById("publicar");
+		var necessites = document.getElementById("necessites");
+		var camps = document.getElementById("camps");
+		var filtres = document.getElementById("filtres");
+		var fecha = document.getElementById("fecha");
+
+		var app = document.querySelectorAll(".app");
+		var appValid = false;		
+
 		function modifica_usuari() {
 			if (document.getElementById("email").disabled == false) {
 				document.getElementById("email").disabled = true;
 			} else {
 				document.getElementById("email").disabled = false
 			}
-			if (document.getElementById("nom-cognom").disabled == false) {
-				document.getElementById("nom-cognom").disabled = true;
+			if (document.getElementById("nomCognom").disabled == false) {
+				document.getElementById("nomCognom").disabled = true;
 			} else {
-				document.getElementById("nom-cognom").disabled = false
+				document.getElementById("nomCognom").disabled = false
 			}
 		}
 
 		function mostrarOcultar() {
-			var checkBoxGestioInterna = document.getElementById("gestioInterna");
-			var checkBoxRecerca = document.getElementById("recerca");
-			var mostrar = document.querySelectorAll(".mostrar");
-			var gestioInterna = document.querySelectorAll(".gestioInterna");
-			var recerca = document.querySelectorAll(".recerca");
+			var mostrarClass = document.querySelectorAll(".mostrar");
+			var gestioInternaClass = document.querySelectorAll(".gestioInterna");
+			var recercaClass = document.querySelectorAll(".recerca");
 
-
-
-			if (checkBoxGestioInterna.checked) {
-				mostrar.forEach((item, index) => {
+			if (gestioInterna.checked) {
+				mostrarClass.forEach((item, index) => {
 					item.classList.remove("d-none")
+					item.classList.remove("invisible")
 				});
-				gestioInterna.forEach((item, index) => {
+				gestioInternaClass.forEach((item, index) => {
 					item.classList.remove("d-none")
+					item.classList.remove("invisible")
 				});
-				recerca.forEach((item, index) => {
+				recercaClass.forEach((item, index) => {
 					item.classList.add("d-none")
+					item.classList.add("invisible")
 				});
 			}
 
-			if (checkBoxRecerca.checked) {
-				mostrar.forEach((item, index) => {
+			if (recerca.checked) {
+				mostrarClass.forEach((item, index) => {
 					item.classList.remove("d-none")
+					item.classList.remove("invisible")
 				});
-				recerca.forEach((item, index) => {
+				recercaClass.forEach((item, index) => {
 					item.classList.remove("d-none")
+					item.classList.remove("invisible")
 				});
-				gestioInterna.forEach((item, index) => {
+				gestioInternaClass.forEach((item, index) => {
 					item.classList.add("d-none")
+					item.classList.add("invisible")
 				});
 			}
+		}
+
+		//validacion formulario
+
+		function validacion() {
+
+			if (!tel.value) {
+				tel.nextElementSibling.classList.remove("d-none");
+				tel.classList.add("border-danger");
+				alertError.classList.remove("d-none");
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+			}
+			if (!centre.value) {
+				centre.nextElementSibling.classList.remove("d-none");
+				centre.classList.add("border-danger");
+				alertError.classList.remove("d-none");
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+			}
+			if (!servei.value) {
+				servei.nextElementSibling.classList.remove("d-none");
+				servei.classList.add("border-danger");
+				alertError.classList.remove("d-none");
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+			}
+			if (!periodicitat.value) {
+				periodicitat.nextElementSibling.classList.remove("d-none");
+				periodicitat.classList.add("border-danger");
+				alertError.classList.remove("d-none");
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+			}
+			if (!necessites.value) {
+				necessites.nextElementSibling.classList.remove("d-none");
+				necessites.classList.add("border-danger");
+				alertError.classList.remove("d-none");
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+			}
+			if (!camps.value) {
+				camps.nextElementSibling.classList.remove("d-none");
+				camps.classList.add("border-danger");
+				alertError.classList.remove("d-none");
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+			}
+			if (!filtres.value) {
+				filtres.nextElementSibling.classList.remove("d-none");
+				filtres.classList.add("border-danger");
+				alertError.classList.remove("d-none");
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+			}
+
+			app.forEach((item) => {
+				console.log(item.checked);
+				if (item.checked) {
+					appValid = true;
+					return;
+				} 
+				if(!item.checked) {
+					appError.classList.remove("d-none");
+					alertError.classList.remove("d-none");
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth'
+					});
+				}
+			});
+
+			if (gestioInterna.checked) {
+				if (!justificacio.value) {
+					gestioInternaError.classList.remove("d-none");
+					justificacio.classList.add("border-danger");
+					alertError.classList.remove("d-none");
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth'
+					});
+				}
+				if (tel.value && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && justificacio.value && appValid) {
+					resumen.classList.remove("d-none");
+					/* sistInformacioForm.submit(); */
+				}
+			}
+			if (recerca.checked) {
+				if (!per.value) {
+					gestioInternaError.classList.remove("d-none");
+					per.classList.add("border-danger");
+					alertError.classList.remove("d-none");
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth'
+					});
+				}
+				if (!publicar.value) {
+					publicar.nextElementSibling.classList.remove("d-none");
+					publicar.classList.add("border-danger");
+					alertError.classList.remove("d-none");
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth'
+					});
+				}
+				if (!fecha.value) {
+					fecha.nextElementSibling.classList.remove("d-none");
+					fecha.classList.add("border-danger");
+					alertError.classList.remove("d-none");
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth'
+					});
+				}
+				if (tel.value && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && per.value && publicar.value && fecha.value && appValid) {
+					resumen.classList.remove("d-none");
+					/* sistInformacioForm.submit(); */
+				}
+			}
+
+			// resumen
+			document.getElementById("nomCognomPopulated").innerHTML = nomCognom.value;
+			document.getElementById("emailPopulated").innerHTML = email.value;
+			document.getElementById("telPopulated").innerHTML = tel.value;
+			document.getElementById("sollicitudExternaPopulated").innerHTML = centre.value;
+			document.getElementById("centrePopulated").innerHTML = centre.value;
+			document.getElementById("justificacioPopulated").innerHTML = justificacio.value;
+			document.getElementById("perPopulated").innerHTML = per.value;
+			document.getElementById("serveiPopulated").innerHTML = servei.value;
+			document.getElementById("periodicitatPopulated").innerHTML = periodicitat.value;
+			document.getElementById("publicarPopulated").innerHTML = publicar.value;
+			document.getElementById("necessitesPopulated").innerHTML = necessites.value;
+			document.getElementById("campsPopulated").innerHTML = camps.value;
+			document.getElementById("filtresPopulated").innerHTML = filtres.value;
+			document.getElementById("fechaPopulated").innerHTML = fecha.value;
+
 		}
 	</script>
 </body>
