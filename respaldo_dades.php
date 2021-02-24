@@ -40,6 +40,11 @@ $fecha = $_POST['fecha']; */
 	<link href="../../../../recursos/css/formulari_ti.css" type='text/css' rel='stylesheet'>
 	<title><?php echo $titulo_web; ?></title>
 	<style>
+		body {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
 		.invisible {
 			visibility: hidden !important;
 		}
@@ -53,375 +58,421 @@ $fecha = $_POST['fecha']; */
 		<div id="resumen" class="row justify-content-center bg-light m-5 p-5 rounded d-none">
 			<div class="col-lg-8">
 				<div class="row">
-					<div class="col-lg-4">Nom_Cognom1_Cognom2:</div>
-					<div class="col-lg-8"><p id="nomCognomPopulated"></p></div>
+					<div class="col-lg-4"><strong>Resum</strong>:</div>
+					<div class="col-lg-8"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Nom Cognom1 Cognom2:</div>
+					<div class="col-lg-8">
+						<p id="nomCognomPopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Email:</div>
-					<div class="col-lg-8"><p id="emailPopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="emailPopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Tel:</div>
-					<div class="col-lg-8"><p id="telPopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="telPopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Sollicitud Externa:</div>
-					<div class="col-lg-8"><p id="sollicitudExternaPopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="sollicitudExternaPopulated"></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Petició:</div>
+					<div class="col-lg-8">
+						<p id="peticioPopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Centre:</div>
-					<div class="col-lg-8"><p id="centrePopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="centrePopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Justificacio:</div>
-					<div class="col-lg-8"><p id="justificacioPopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="justificacioPopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Per:</div>
-					<div class="col-lg-8"><p id="perPopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="perPopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Servei:</div>
-					<div class="col-lg-8"><p id="serveiPopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="serveiPopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Periodicitat:</div>
-					<div class="col-lg-8"><p id="periodicitatPopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="periodicitatPopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Publicar:</div>
-					<div class="col-lg-8"><p id="publicarPopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="publicarPopulated"></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Aplicació:</div>
+					<div class="col-lg-8">
+						<p id="aplicacioPopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Necessites:</div>
-					<div class="col-lg-8"><p id="necessitesPopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="necessitesPopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Camps:</div>
-					<div class="col-lg-8"><p id="campsPopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="campsPopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Filtres:</div>
-					<div class="col-lg-8"><p id="filtresPopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="filtresPopulated"></p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">Fecha:</div>
-					<div class="col-lg-8"><p id="fechaPopulated"></p></div>
+					<div class="col-lg-8">
+						<p id="fechaPopulated"></p>
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<form method="POST" action="sist_informacio_resum.php" id="sistInformacioForm">
-
-			<div id="alert-error" class="row my-5 justify-content-center d-none">
-				<div class="col-lg-8 p-3 fw-bold text-center bg-danger rounded">
-					Si us plau ompli els camps obligatoris.
-				</div>
-			</div>
-
-			<div class="row bg-light m-5 p-5 rounded">
-				<div class="col-lg-2 d-flex justify-content-center align-items-center">
-					<h6>Hola!</h6>
-				</div>
-				<div class="col-lg-4">
-					<input name="nomCognom" type="text" class="form-control" id="nomCognom" placeholder="Nom_Cognom1_Cognom2" value="<?php echo $nom_usu . " " . $cognom_usu ?>" disabled>
-
-					<input name="email" type="email" class="form-control" id="email" placeholder="usuari@bsa.cat" value="<?php echo $usuario; ?>@bsa.cat" disabled>
-
-				</div>
-				<div class="col-lg-6 d-flex align-items-center">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value="" id="usuari" onclick=modifica_usuari()>
-						<label class="form-check-label" for="usuari">
-							Si no ets la persona correcta, si us plau, fes click aquí
-						</label>
+			<div id="ocultarForm">
+				<div id="alert-error" class="row my-5 justify-content-center d-none">
+					<div class="col-lg-8 p-3 fw-bold text-center bg-danger rounded">
+						Si us plau ompli els camps obligatoris.
 					</div>
 				</div>
 
-				<div class="col-lg-2 d-flex justify-content-center align-items-center mt-3">
-					<h6>Telef./Ext *</h6>
-				</div>
-				<div class="col-lg-4 mt-3">
-					<input name="tel" type="tel" class="form-control" id="tel" placeholder="Telef./Ext" minlength="5" maxlength="9">
-					<div class="text-danger d-none">
-						Si us plau entre un valor
+				<div class="row bg-light m-5 p-5 rounded">
+					<div class="col-lg-2 d-flex justify-content-center align-items-center">
+						<h6>Hola!</h6>
 					</div>
-				</div>
-				<div class="col-lg-6 d-flex align-items-center mt-3">
-					<div class="form-check">
-						<input name="sollicitudExterna" class="form-check-input" type="checkbox" value="sollicitudExterna" id="solExt">
-						<label class="form-check-label" for="solExt">
-							Si és una sol·licitud externa, si us plau, fes click aquí
-						</label>
-					</div>
-				</div>
-			</div>
+					<div class="col-lg-4">
+						<input name="nomCognom" type="text" class="form-control" id="nomCognom" placeholder="Nom_Cognom1_Cognom2" value="<?php echo $nom_usu . " " . $cognom_usu ?>" disabled>
 
-			<div class="row bg-light m-5 p-5 rounded">
-				<div class="col-lg-12 text-center">
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="gestioInterna" value="gestioInterna" onclick="mostrarOcultar()">
-						<label class="form-check-label" for="gestioInterna">
-							<h6>Gestió Interna</h6>
-						</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="recerca" value="recerca" onclick="mostrarOcultar()">
-						<label class="form-check-label" for="recerca">
-							<h6>Recerca</h6>
-						</label>
-					</div>
-				</div>
-			</div>
-
-			<div class="row bg-light m-5 p-5 rounded mostrar d-none invisible">
-				<div class="col-lg-12 fw-bold text-danger text-center recerca d-none invisible">“Abans de cursar aquesta sol·licitud, recorda que cal haver presentat el protocol d'estudi al Comitè de Recerca”</div>
-				<div class="col-lg-12">
-					<div class="row my-5">
-						<div class="col-lg-2 d-flex justify-content-center align-items-center">
-							<h6>Tria el centre *</h6>
-						</div>
-						<div class="col-lg-4">
-							<select name="centre" id="centre" class="form-select" aria-label="Default select example">
-								<option value="" selected hidden>Centre</option>
-								<?php
-								for ($i = 1; $i < count($centres_SAP); $i++) {
-									echo "<option value='" . $centres_SAP[$i]["CMB_UP"] . "'>" . $centres_SAP[$i]["DESCRIPCION"] . "</option>";
-								}
-								?>
-							</select>
-							<div class="text-danger d-none">
-								Si us plau entre un valor
-							</div>
-						</div>
-
-						<div class="col-lg-2 d-flex justify-content-center align-items-center">
-							<h6 class="gestioInterna d-none">Tria el tipus de justificació *</h6>
-							<h6 class="recerca d-none">Per *</h6>
-						</div>
-						<div class="col-lg-4">
-							<select name="justificacio" id="justificacio" class="form-select gestioInterna d-none invisible" aria-label="Default select example">
-								<option value="" selected hidden>Justificació</option>
-								<option value="Gestió_interna_del_Servei_Unitat">Gestió interna del Servei / Unitat</option>
-								<option value="Pla_de_Salut_o_similars">Pla de Salut o similars</option>
-								<option value="Resposta_a_objectius">Resposta a objectius</option>
-								<option value="IQF">IQF</option>
-								<option value="Altres">Altres</option>
-							</select>
-							<div id="gestioInterna-error" class="text-danger d-none">
-								Si us plau entre un valor
-							</div>
-							<select name="per" id="per" class="form-select recerca d-none invisible" aria-label="Default select example">
-								<option value="" selected hidden>Per</option>
-								<option value="Publicació_a_congressos">Publicació a congressos</option>
-								<option value="Publicació_a_revistes">Publicació a revistes</option>
-								<option value="Per_documentació">Per documentació (tesis, tesines)</option>
-							</select>
-							<div id="recerca-error" class="text-danger d-none">
-								Si us plau entre un valor
-							</div>
-						</div>
+						<input name="email" type="email" class="form-control" id="email" placeholder="usuari@bsa.cat" value="<?php echo $usuario; ?>@bsa.cat" disabled>
 
 					</div>
-					<div class="row my-5">
-						<div class="col-lg-2 d-flex justify-content-center align-items-center">
-							<h6>Tria el servei *</h6>
-						</div>
-						<div class="col-lg-4">
-							<select name="servei" id="servei" class="form-select" aria-label="Default select example">
-								<option value="" selected hidden>Servei</option>
-								<?php
-								for ($i = 1; $i < count($serveis_SAP); $i++) {
-									echo "<option value='" . $serveis_SAP[$i]["ORGID"] . "'>" . $serveis_SAP[$i]["ORGNA"] . "</option>";
-								}
-								?>
-							</select>
-							<div class="text-danger d-none">
-								Si us plau entre un valor
-							</div>
-						</div>
-						<div class="col-lg-2 d-flex justify-content-center align-items-center">
-							<h6>Periodicitat *</h6>
-						</div>
-						<div class="col-lg-4">
-							<select name="periodicitat" id="periodicitat" class="form-select" aria-label="Default select example">
-								<option value="" selected hidden>Periodicitat</option>
-								<option value="Només_ara">Només ara</option>
-								<option value="Setmanal">Setmanal</option>
-								<option value="Quinzenal">Quinzenal</option>
-								<option value="Mensual">Mensual</option>
-								<option value="Trimestral">Trimestral</option>
-								<option value="Quadrimestral">Quadrimestral</option>
-								<option value="Semestral">Semestral</option>
-								<option value="Anual">Anual</option>
-							</select>
-							<div class="text-danger d-none">
-								Si us plau entre un valor
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-12 my-3 recerca d-none invisible">
-					<div class="row">
-						<div class="col-lg-4 d-flex justify-content-center align-items-center">
-							<label for="publicar" class="form-label">
-								<h6>A on ho penses publicar? *</h6>
+					<div class="col-lg-6 d-flex align-items-center">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="" id="usuari" onclick=modifica_usuari()>
+							<label class="form-check-label" for="usuari">
+								Si no ets la persona correcta, si us plau, fes click aquí
 							</label>
 						</div>
-						<div class="col-lg-8">
-							<textarea name="publicar" class="form-control" id="publicar" rows="1"></textarea>
-							<div class="text-danger d-none">
-								Si us plau entre un valor
+					</div>
+
+					<div class="col-lg-2 d-flex justify-content-center align-items-center mt-3">
+						<h6>Telef./Ext *</h6>
+					</div>
+					<div class="col-lg-4 mt-3">
+						<input name="tel" type="tel" class="form-control" id="tel" placeholder="Telef./Ext" minlength="5" maxlength="9">
+						<div class="text-danger d-none">
+							Si us plau entre un valor
+						</div>
+					</div>
+					<div class="col-lg-6 d-flex align-items-center mt-3">
+						<div class="form-check">
+							<input name="sollicitudExterna" class="form-check-input" type="checkbox" value="sollicitudExterna" id="sollicitudExterna">
+							<label class="form-check-label" for="solExt">
+								Si és una sol·licitud externa, si us plau, fes click aquí
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="row bg-light m-5 p-5 rounded">
+					<div class="col-lg-12 text-center">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input peticio" type="radio" name="peticio" id="gestioInterna" value="gestioInterna" onclick="mostrarOcultar()">
+							<label class="form-check-label" for="gestioInterna">
+								<h6>Gestió Interna</h6>
+							</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input peticio" type="radio" name="peticio" id="recerca" value="recerca" onclick="mostrarOcultar()">
+							<label class="form-check-label" for="recerca">
+								<h6>Recerca</h6>
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="row bg-light m-5 p-5 rounded mostrar d-none invisible">
+					<div class="col-lg-12 fw-bold text-danger text-center recerca d-none invisible">“Abans de cursar aquesta sol·licitud, recorda que cal haver presentat el protocol d'estudi al Comitè de Recerca”</div>
+					<div class="col-lg-12">
+						<div class="row my-5">
+							<div class="col-lg-2 d-flex justify-content-center align-items-center">
+								<h6>Tria el centre *</h6>
+							</div>
+							<div class="col-lg-4">
+								<select name="centre" id="centre" class="form-select" aria-label="Default select example">
+									<option value="" selected hidden>Centre</option>
+									<?php
+									for ($i = 1; $i < count($centres_SAP); $i++) {
+										echo "<option value='" . $centres_SAP[$i]["CMB_UP"] . "'>" . $centres_SAP[$i]["DESCRIPCION"] . "</option>";
+									}
+									?>
+								</select>
+								<div class="text-danger d-none">
+									Si us plau entre un valor
+								</div>
+							</div>
+
+							<div class="col-lg-2 d-flex justify-content-center align-items-center">
+								<h6 class="gestioInterna d-none">Tria el tipus de justificació *</h6>
+								<h6 class="recerca d-none">Per *</h6>
+							</div>
+							<div class="col-lg-4">
+								<select name="justificacio" id="justificacio" class="form-select gestioInterna d-none invisible" aria-label="Default select example">
+									<option value="" selected hidden>Justificació</option>
+									<option value="Gestió_interna_del_Servei_Unitat">Gestió interna del Servei / Unitat</option>
+									<option value="Pla_de_Salut_o_similars">Pla de Salut o similars</option>
+									<option value="Resposta_a_objectius">Resposta a objectius</option>
+									<option value="IQF">IQF</option>
+									<option value="Altres">Altres</option>
+								</select>
+								<div id="gestioInterna-error" class="text-danger d-none">
+									Si us plau entre un valor
+								</div>
+								<select name="per" id="per" class="form-select recerca d-none invisible" aria-label="Default select example">
+									<option value="" selected hidden>Per</option>
+									<option value="Publicació_a_congressos">Publicació a congressos</option>
+									<option value="Publicació_a_revistes">Publicació a revistes</option>
+									<option value="Per_documentació">Per documentació (tesis, tesines)</option>
+								</select>
+								<div id="recerca-error" class="text-danger d-none">
+									Si us plau entre un valor
+								</div>
+							</div>
+
+						</div>
+						<div class="row my-5">
+							<div class="col-lg-2 d-flex justify-content-center align-items-center">
+								<h6>Tria el servei *</h6>
+							</div>
+							<div class="col-lg-4">
+								<select name="servei" id="servei" class="form-select" aria-label="Default select example">
+									<option value="" selected hidden>Servei</option>
+									<?php
+									for ($i = 1; $i < count($serveis_SAP); $i++) {
+										echo "<option value='" . $serveis_SAP[$i]["ORGID"] . "'>" . $serveis_SAP[$i]["ORGNA"] . "</option>";
+									}
+									?>
+								</select>
+								<div class="text-danger d-none">
+									Si us plau entre un valor
+								</div>
+							</div>
+							<div class="col-lg-2 d-flex justify-content-center align-items-center">
+								<h6>Periodicitat *</h6>
+							</div>
+							<div class="col-lg-4">
+								<select name="periodicitat" id="periodicitat" class="form-select" aria-label="Default select example">
+									<option value="" selected hidden>Periodicitat</option>
+									<option value="Només_ara">Només ara</option>
+									<option value="Setmanal">Setmanal</option>
+									<option value="Quinzenal">Quinzenal</option>
+									<option value="Mensual">Mensual</option>
+									<option value="Trimestral">Trimestral</option>
+									<option value="Quadrimestral">Quadrimestral</option>
+									<option value="Semestral">Semestral</option>
+									<option value="Anual">Anual</option>
+								</select>
+								<div class="text-danger d-none">
+									Si us plau entre un valor
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-12 my-3 recerca d-none invisible">
+						<div class="row">
+							<div class="col-lg-4 d-flex justify-content-center align-items-center">
+								<label for="publicar" class="form-label">
+									<h6>A on ho penses publicar? *</h6>
+								</label>
+							</div>
+							<div class="col-lg-8">
+								<textarea name="publicar" class="form-control" id="publicar" rows="1"></textarea>
+								<div class="text-danger d-none">
+									Si us plau entre un valor
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-12 my-3 mostrar d-none invisible">
+						<div class="row">
+							<div class="col-lg-12 text-center my-3">
+								<h6>Especifica de quina aplicació necessites les dades. Poden haver-hi múltiples seleccions. *</h6>
+							</div>
+							<div class="row d-flex justify-content-center align-items-center my-3">
+								<div class="col-md-2 form-check">
+									<input name="app[]" class="form-check-input app" type="checkbox" value="FormularisWeb" id="FormularisWeb">
+									<label class="form-check-label" for="FormularisWeb">
+										Formularis web
+									</label>
+								</div>
+								<div class="col-md-2 form-check">
+									<input name="app[]" class="form-check-input app" type="checkbox" value="gesdohc" id="gesdohc">
+									<label class="form-check-label" for="gesdohc">
+										Gesdohc
+									</label>
+								</div>
+								<div class="col-md-2 form-check">
+									<input name="app[]" class="form-check-input app" type="checkbox" value="ecap" id="ecap">
+									<label class="form-check-label" for="ecap">
+										Ecap
+									</label>
+								</div>
+								<div class="col-md-2 form-check">
+									<input name="app[]" class="form-check-input app" type="checkbox" value="tesis" id="tesis">
+									<label class="form-check-label" for="tesis">
+										Tesis
+									</label>
+								</div>
+								<div class="col-md-2 form-check">
+									<input name="app[]" class="form-check-input app" type="checkbox" value="omi" id="omi">
+									<label class="form-check-label" for="omi">
+										Omi
+									</label>
+								</div>
+							</div>
+							<div class="row d-flex justify-content-center align-items-center my-3">
+								<div class="col-md-2 form-check">
+									<input name="app[]" class="form-check-input app" type="checkbox" value="silicon" id="silicon">
+									<label class="form-check-label" for="silicon">
+										Silicon
+									</label>
+								</div>
+								<div class="col-md-2 form-check">
+									<input name="app[]" class="form-check-input app" type="checkbox" value="taonet" id="taonet">
+									<label class="form-check-label" for="taonet">
+										Taonet
+									</label>
+								</div>
+								<div class="col-md-2 form-check">
+									<input name="app[]" class="form-check-input app" type="checkbox" value="sisdi" id="sisdi">
+									<label class="form-check-label" for="sisdi">
+										Sisdi
+									</label>
+								</div>
+								<div class="col-md-2 form-check">
+									<input name="app[]" class="form-check-input app" type="checkbox" value="sap" id="sap">
+									<label class="form-check-label" for="sap">
+										SAP
+									</label>
+								</div>
+								<div class="col-md-2 form-check">
+									<input name="app[]" class="form-check-input app" type="checkbox" value="altres" id="altres">
+									<label class="form-check-label" for="altres">
+										Altres
+									</label>
+								</div>
+							</div>
+							<div class="col-lg-12 text-center">
+								<div id="app-error" class="text-danger d-none">
+									Si us plau seleccioneu un camp.
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="col-lg-12 my-3 mostrar d-none invisible">
-					<div class="row">
-						<div class="col-lg-12 text-center my-3">
-							<h6>Especifica de quina aplicació necessites les dades. Poden haver-hi múltiples seleccions. *</h6>
+				<div class="row bg-light m-5 p-5 rounded mostrar d-none invisible">
+					<div class="col-lg-12 my-3">
+						<label for="necessites" class="form-label">
+							<h6>Indica'ns que necessites *</h6>
+						</label>
+						<textarea name="necessites" class="form-control" id="necessites" rows="1"></textarea>
+						<div class="text-danger d-none">
+							Si us plau entre un valor
 						</div>
-						<div class="row d-flex justify-content-center align-items-center my-3">
-							<div class="col-md-2 form-check">
-								<input name="checkArr" class="form-check-input app" type="checkbox" value="FormularisWeb" id="FormularisWeb">
-								<label class="form-check-label" for="FormularisWeb">
-									Formularis web
-								</label>
-							</div>
-							<div class="col-md-2 form-check">
-								<input name="checkArr" class="form-check-input app" type="checkbox" value="gesdohc" id="gesdohc">
-								<label class="form-check-label" for="gesdohc">
-									Gesdohc
-								</label>
-							</div>
-							<div class="col-md-2 form-check">
-								<input name="checkArr" class="form-check-input app" type="checkbox" value="ecap" id="ecap">
-								<label class="form-check-label" for="ecap">
-									Ecap
-								</label>
-							</div>
-							<div class="col-md-2 form-check">
-								<input name="checkArr" class="form-check-input app" type="checkbox" value="tesis" id="tesis">
-								<label class="form-check-label" for="tesis">
-									Tesis
-								</label>
-							</div>
-							<div class="col-md-2 form-check">
-								<input name="checkArr" class="form-check-input app" type="checkbox" value="omi" id="omi">
-								<label class="form-check-label" for="omi">
-									Omi
-								</label>
-							</div>
+					</div>
+					<div class="col-lg-6 my-3">
+						<label for="camps" class="form-label">
+							<h6>Indica'ns quins camps necessites *</h6>
+						</label>
+						<textarea name="camps" class="form-control" id="camps" rows="1"></textarea>
+						<div class="text-danger d-none">
+							Si us plau entre un valor
 						</div>
-						<div class="row d-flex justify-content-center align-items-center my-3">
-							<div class="col-md-2 form-check">
-								<input name="checkArr" class="form-check-input app" type="checkbox" value="silicon" id="silicon">
-								<label class="form-check-label" for="silicon">
-									Silicon
-								</label>
-							</div>
-							<div class="col-md-2 form-check">
-								<input name="checkArr" class="form-check-input app" type="checkbox" value="taonet" id="taonet">
-								<label class="form-check-label" for="taonet">
-									Taonet
-								</label>
-							</div>
-							<div class="col-md-2 form-check">
-								<input name="checkArr" class="form-check-input app" type="checkbox" value="sisdi" id="sisdi">
-								<label class="form-check-label" for="sisdi">
-									Sisdi
-								</label>
-							</div>
-							<div class="col-md-2 form-check">
-								<input name="checkArr" class="form-check-input app" type="checkbox" value="sap" id="sap">
-								<label class="form-check-label" for="sap">
-									SAP
-								</label>
-							</div>
-							<div class="col-md-2 form-check">
-								<input name="checkArr" class="form-check-input app" type="checkbox" value="altres" id="altres">
-								<label class="form-check-label" for="altres">
-									Altres
-								</label>
-							</div>
+					</div>
+					<div class="col-lg-6 my-3">
+						<label for="filtres" class="form-label">
+							<h6>Indica'ns quins filtres necessites *</h6>
+						</label>
+						<textarea name="filtres" class="form-control" id="filtres" rows="1"></textarea>
+						<div class="text-danger d-none">
+							Si us plau entre un valor
 						</div>
-						<div class="col-lg-12 text-center">
-							<div id="app-error" class="text-danger d-none">
-								Si us plau seleccioneu un camp.
+					</div>
+					<div class="col-lg-6">
+						<div class="row">
+							<div class="col-lg-12 my-3">
+								<p>Si ho necessites, fes una captura de pantalla, guarda-la en un arxiu i adjunta-la aquí</p>
+							</div>
+							<div class="col-lg-12 my-3">
+								<input id="bfupload" name="bfupload[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
 							</div>
 						</div>
 					</div>
+
+
+					<div class="col-lg-6">
+						<div class="row recerca d-none invisible">
+							<div class="col-lg-12 my-3">
+								<label for="fecha">Data de termini per presentar el resum? *</label>
+							</div>
+							<div class="col-lg-12 my-3">
+								<input type="date" id="fecha" name="fecha">
+								<div class="text-danger d-none">
+									Si us plau entre un valor
+								</div>
+							</div>
+						</div>
+					</div>
+
+
 				</div>
 			</div>
-
-			<div class="row bg-light m-5 p-5 rounded mostrar d-none invisible">
-				<div class="col-lg-12 my-3">
-					<label for="necessites" class="form-label">
-						<h6>Indica'ns que necessites *</h6>
-					</label>
-					<textarea name="necessites" class="form-control" id="necessites" rows="1"></textarea>
-					<div class="text-danger d-none">
-						Si us plau entre un valor
-					</div>
-				</div>
-				<div class="col-lg-6 my-3">
-					<label for="camps" class="form-label">
-						<h6>Indica'ns quins camps necessites *</h6>
-					</label>
-					<textarea name="camps" class="form-control" id="camps" rows="1"></textarea>
-					<div class="text-danger d-none">
-						Si us plau entre un valor
-					</div>
-				</div>
-				<div class="col-lg-6 my-3">
-					<label for="filtres" class="form-label">
-						<h6>Indica'ns quins filtres necessites *</h6>
-					</label>
-					<textarea name="filtres" class="form-control" id="filtres" rows="1"></textarea>
-					<div class="text-danger d-none">
-						Si us plau entre un valor
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="row">
-						<div class="col-lg-12 my-3">
-							<p>Si ho necessites, fes una captura de pantalla, guarda-la en un arxiu i adjunta-la aquí</p>
-						</div>
-						<div class="col-lg-12 my-3">
-							<input id="bfupload" name="bfupload[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-lg-6">
-					<div class="row recerca d-none invisible">
-						<div class="col-lg-12 my-3">
-							<label for="fecha">Data de termini per presentar el resum? *</label>
-						</div>
-						<div class="col-lg-12 my-3">
-							<input type="date" id="fecha" name="fecha">
-							<div class="text-danger d-none">
-								Si us plau entre un valor
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-			</div>
-
 			<div class="row bg-light m-5 p-5 rounded">
 				<div class="col-md-4 text-center">
-					<button type="button" class="btn btn-danger px-4 m-2" onclick="javascript:window.close();">Sortir</button>
+					<button type="button" class="btn btn-danger px-4 m-2" onclick="window.location='http://seradev.bsa.es/serveisgenerals/informatica/formulari_ti/menu.php'">Sortir</button>
 				</div>
 				<div class="col-md-4 text-center">
-					<button type="button" class="btn btn-secondary px-4 m-2" onclick="javascript:window.history.back();">Enrere</button>
+					<button id="enrereBtn" type="button" class="btn btn-secondary px-4 m-2" onclick="javascript:window.history.back();">Enrere</button>
+					<button id="editaBtn" type="button" class="btn btn-secondary px-4 m-2 d-none" onclick="edita()">Edita</button>
 				</div>
 				<div class="col-md-4 text-center">
-					<button type="button" class="btn btn-primary px-4 m-2" onclick="validacion()">Continuar</button>
+					<button id="continuarBtn" type="button" class="btn btn-primary px-4 m-2" onclick="validacion()">Continuar</button>
+					<button id="enviarBtn" type="submit" class="btn btn-primary px-4 m-2 d-none">Enviar</button>
 				</div>
 			</div>
 
@@ -439,6 +490,7 @@ $fecha = $_POST['fecha']; */
 		var sistInformacioForm = document.getElementById("sistInformacioForm");
 
 		var resumen = document.getElementById("resumen");
+		var ocultarForm = document.getElementById("ocultarForm");
 
 		var alertError = document.getElementById("alert-error");
 		var gestioInternaError = document.getElementById("gestioInterna-error");
@@ -447,6 +499,7 @@ $fecha = $_POST['fecha']; */
 
 		var nomCognom = document.getElementById("nomCognom");
 		var email = document.getElementById("email");
+		var sollicitudExterna = document.getElementById("sollicitudExterna");
 		var gestioInterna = document.getElementById("gestioInterna");
 		var recerca = document.getElementById("recerca");
 		var tel = document.getElementById("tel");
@@ -461,8 +514,17 @@ $fecha = $_POST['fecha']; */
 		var filtres = document.getElementById("filtres");
 		var fecha = document.getElementById("fecha");
 
+		var peticio = document.querySelectorAll(".peticio");
+		var peticioSelected;
+
 		var app = document.querySelectorAll(".app");
-		var appValid = false;		
+		var appValid = false;
+		var appValueArray = [];
+
+		var editaBtn = document.getElementById("editaBtn");
+		var continuarBtn = document.getElementById("continuarBtn");
+		var enviarBtn = document.getElementById("enviarBtn");
+		var enrereBtn = document.getElementById("enrereBtn");
 
 		function modifica_usuari() {
 			if (document.getElementById("email").disabled == false) {
@@ -513,9 +575,26 @@ $fecha = $_POST['fecha']; */
 			}
 		}
 
+		function edita() {
+			ocultarForm.classList.remove("d-none");
+			resumen.classList.add("d-none");
+			editaBtn.classList.add("d-none");
+			enviarBtn.classList.add("d-none");
+			ocultarForm.classList.remove("d-none");
+			continuarBtn.classList.remove("d-none");
+			enrereBtn.classList.remove("d-none");
+		}
+
 		//validacion formulario
 
 		function validacion() {
+
+			peticio.forEach((item) => {
+				if (item.checked) {
+					peticioSelected = item.value;
+					return;
+				}
+			});
 
 			if (!tel.value) {
 				tel.nextElementSibling.classList.remove("d-none");
@@ -582,12 +661,12 @@ $fecha = $_POST['fecha']; */
 			}
 
 			app.forEach((item) => {
-				console.log(item.checked);
 				if (item.checked) {
+					appValueArray.push(item.value);
 					appValid = true;
 					return;
-				} 
-				if(!item.checked) {
+				}
+				if (!item.checked) {
 					appError.classList.remove("d-none");
 					alertError.classList.remove("d-none");
 					window.scrollTo({
@@ -609,7 +688,11 @@ $fecha = $_POST['fecha']; */
 				}
 				if (tel.value && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && justificacio.value && appValid) {
 					resumen.classList.remove("d-none");
-					/* sistInformacioForm.submit(); */
+					editaBtn.classList.remove("d-none");
+					enviarBtn.classList.remove("d-none");
+					ocultarForm.classList.add("d-none");
+					continuarBtn.classList.add("d-none");
+					enrereBtn.classList.add("d-none");
 				}
 			}
 			if (recerca.checked) {
@@ -642,25 +725,31 @@ $fecha = $_POST['fecha']; */
 				}
 				if (tel.value && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && per.value && publicar.value && fecha.value && appValid) {
 					resumen.classList.remove("d-none");
-					/* sistInformacioForm.submit(); */
+					editaBtn.classList.remove("d-none");
+					enviarBtn.classList.remove("d-none");
+					ocultarForm.classList.add("d-none");
+					continuarBtn.classList.add("d-none");
+					enrereBtn.classList.add("d-none");
 				}
 			}
 
 			// resumen
-			document.getElementById("nomCognomPopulated").innerHTML = nomCognom.value;
-			document.getElementById("emailPopulated").innerHTML = email.value;
-			document.getElementById("telPopulated").innerHTML = tel.value;
-			document.getElementById("sollicitudExternaPopulated").innerHTML = centre.value;
-			document.getElementById("centrePopulated").innerHTML = centre.value;
-			document.getElementById("justificacioPopulated").innerHTML = justificacio.value;
-			document.getElementById("perPopulated").innerHTML = per.value;
-			document.getElementById("serveiPopulated").innerHTML = servei.value;
-			document.getElementById("periodicitatPopulated").innerHTML = periodicitat.value;
-			document.getElementById("publicarPopulated").innerHTML = publicar.value;
-			document.getElementById("necessitesPopulated").innerHTML = necessites.value;
-			document.getElementById("campsPopulated").innerHTML = camps.value;
-			document.getElementById("filtresPopulated").innerHTML = filtres.value;
-			document.getElementById("fechaPopulated").innerHTML = fecha.value;
+			document.getElementById("nomCognomPopulated").innerHTML = nomCognom.value ? nomCognom.value : 'N/A';
+			document.getElementById("emailPopulated").innerHTML = email.value ? email.value : 'N/A';
+			document.getElementById("telPopulated").innerHTML = tel.value ? tel.value : 'N/A';
+			document.getElementById("peticioPopulated").innerHTML = peticioSelected ? peticioSelected : 'N/A';
+			document.getElementById("sollicitudExternaPopulated").innerHTML = sollicitudExterna.checked ? 'Si' : 'No';
+			document.getElementById("centrePopulated").innerHTML = centre.value ? centre.value : 'N/A';
+			document.getElementById("justificacioPopulated").innerHTML = justificacio.value ? justificacio.value : 'N/A';
+			document.getElementById("perPopulated").innerHTML = per.value ? per.value : 'N/A';
+			document.getElementById("serveiPopulated").innerHTML = servei.value ? servei.value : 'N/A';
+			document.getElementById("periodicitatPopulated").innerHTML = periodicitat.value ? periodicitat.value : 'N/A';
+			document.getElementById("publicarPopulated").innerHTML = publicar.value ? publicar.value : 'N/A';
+			document.getElementById("aplicacioPopulated").innerHTML = appValueArray ? appValueArray.splice(0, appValueArray.length, appValueArray) : 'N/A';
+			document.getElementById("necessitesPopulated").innerHTML = necessites.value ? necessites.value : 'N/A';
+			document.getElementById("campsPopulated").innerHTML = camps.value ? camps.value : 'N/A';
+			document.getElementById("filtresPopulated").innerHTML = filtres.value ? filtres.value : 'N/A';
+			document.getElementById("fechaPopulated").innerHTML = fecha.value ? fecha.value : 'N/A';
 
 		}
 	</script>
