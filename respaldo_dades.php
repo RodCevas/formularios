@@ -191,9 +191,9 @@ $fecha = $_POST['fecha']; */
 						<h6>Telef./Ext *</h6>
 					</div>
 					<div class="col-lg-4 mt-3">
-						<input name="tel" type="tel" class="form-control" id="tel" placeholder="Telef./Ext" minlength="5" maxlength="9">
+						<input name="tel" type="tel" class="form-control" id="tel" placeholder="Telef./Ext" maxlength="9">
 						<div class="text-danger d-none">
-							Si us plau entre un valor
+							El número de telèfon ha de ser de <strong>5 o 9</strong> dígits.
 						</div>
 					</div>
 					<div class="col-lg-6 d-flex align-items-center mt-3">
@@ -496,6 +496,7 @@ $fecha = $_POST['fecha']; */
 		var gestioInternaError = document.getElementById("gestioInterna-error");
 		var recercaError = document.getElementById("recerca-error");
 		var appError = document.getElementById("app-error");
+		var telNumero = document.getElementById("telNumero");
 
 		var nomCognom = document.getElementById("nomCognom");
 		var email = document.getElementById("email");
@@ -589,6 +590,8 @@ $fecha = $_POST['fecha']; */
 
 		function validacion() {
 
+			var telValidacio = tel.value.length < 5 || (tel.value.length > 5 && tel.value.length < 9) || tel.value.length > 9;
+
 			peticio.forEach((item) => {
 				if (item.checked) {
 					peticioSelected = item.value;
@@ -596,7 +599,7 @@ $fecha = $_POST['fecha']; */
 				}
 			});
 
-			if (!tel.value) {
+			if (telValidacio) {
 				tel.nextElementSibling.classList.remove("d-none");
 				tel.classList.add("border-danger");
 				alertError.classList.remove("d-none");
@@ -604,7 +607,11 @@ $fecha = $_POST['fecha']; */
 					top: 0,
 					behavior: 'smooth'
 				});
+			} else {
+				tel.nextElementSibling.classList.add("d-none");
+				tel.classList.remove("border-danger");				
 			}
+
 			if (!centre.value) {
 				centre.nextElementSibling.classList.remove("d-none");
 				centre.classList.add("border-danger");
@@ -613,7 +620,11 @@ $fecha = $_POST['fecha']; */
 					top: 0,
 					behavior: 'smooth'
 				});
+			} else {
+				centre.nextElementSibling.classList.add("d-none");
+				centre.classList.remove("border-danger");			
 			}
+
 			if (!servei.value) {
 				servei.nextElementSibling.classList.remove("d-none");
 				servei.classList.add("border-danger");
@@ -622,7 +633,11 @@ $fecha = $_POST['fecha']; */
 					top: 0,
 					behavior: 'smooth'
 				});
+			} else {
+				servei.nextElementSibling.classList.add("d-none");
+				servei.classList.remove("border-danger");			
 			}
+
 			if (!periodicitat.value) {
 				periodicitat.nextElementSibling.classList.remove("d-none");
 				periodicitat.classList.add("border-danger");
@@ -631,7 +646,11 @@ $fecha = $_POST['fecha']; */
 					top: 0,
 					behavior: 'smooth'
 				});
+			} else {
+				periodicitat.nextElementSibling.classList.add("d-none");
+				periodicitat.classList.remove("border-danger");				
 			}
+
 			if (!necessites.value) {
 				necessites.nextElementSibling.classList.remove("d-none");
 				necessites.classList.add("border-danger");
@@ -640,7 +659,11 @@ $fecha = $_POST['fecha']; */
 					top: 0,
 					behavior: 'smooth'
 				});
+			} else {
+				necessites.nextElementSibling.classList.add("d-none");
+				necessites.classList.remove("border-danger");				
 			}
+
 			if (!camps.value) {
 				camps.nextElementSibling.classList.remove("d-none");
 				camps.classList.add("border-danger");
@@ -649,7 +672,11 @@ $fecha = $_POST['fecha']; */
 					top: 0,
 					behavior: 'smooth'
 				});
+			} else {
+				camps.nextElementSibling.classList.add("d-none");
+				camps.classList.remove("border-danger");				
 			}
+
 			if (!filtres.value) {
 				filtres.nextElementSibling.classList.remove("d-none");
 				filtres.classList.add("border-danger");
@@ -658,15 +685,20 @@ $fecha = $_POST['fecha']; */
 					top: 0,
 					behavior: 'smooth'
 				});
+			} else {
+				filtres.nextElementSibling.classList.add("d-none");
+				filtres.classList.remove("border-danger");				
 			}
 
 			app.forEach((item) => {
 				if (item.checked) {
+					console.log('ok');
+					appError.classList.add("d-none");
 					appValueArray.push(item.value);
-					appValid = true;
-					return;
+					appValid = true;					
 				}
 				if (!item.checked) {
+					console.log('error');
 					appError.classList.remove("d-none");
 					alertError.classList.remove("d-none");
 					window.scrollTo({
@@ -685,14 +717,20 @@ $fecha = $_POST['fecha']; */
 						top: 0,
 						behavior: 'smooth'
 					});
+				} else {
+					gestioInternaError.classList.add("d-none");
+					justificacio.classList.remove("border-danger");					
 				}
-				if (tel.value && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && justificacio.value && appValid) {
+
+				if (!telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && justificacio.value && appValid) {
 					resumen.classList.remove("d-none");
 					editaBtn.classList.remove("d-none");
 					enviarBtn.classList.remove("d-none");
 					ocultarForm.classList.add("d-none");
 					continuarBtn.classList.add("d-none");
 					enrereBtn.classList.add("d-none");
+					alertError.classList.add("d-none");
+					appError.classList.add("d-none");
 				}
 			}
 			if (recerca.checked) {
@@ -704,7 +742,11 @@ $fecha = $_POST['fecha']; */
 						top: 0,
 						behavior: 'smooth'
 					});
+				} else {
+					gestioInternaError.classList.add("d-none");
+					per.classList.remove("border-danger");					
 				}
+
 				if (!publicar.value) {
 					publicar.nextElementSibling.classList.remove("d-none");
 					publicar.classList.add("border-danger");
@@ -713,7 +755,11 @@ $fecha = $_POST['fecha']; */
 						top: 0,
 						behavior: 'smooth'
 					});
+				} else {
+					publicar.nextElementSibling.classList.add("d-none");
+					publicar.classList.remove("border-danger");					
 				}
+
 				if (!fecha.value) {
 					fecha.nextElementSibling.classList.remove("d-none");
 					fecha.classList.add("border-danger");
@@ -722,14 +768,20 @@ $fecha = $_POST['fecha']; */
 						top: 0,
 						behavior: 'smooth'
 					});
+				} else {
+					fecha.nextElementSibling.classList.add("d-none");
+					fecha.classList.remove("border-danger");					
 				}
-				if (tel.value && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && per.value && publicar.value && fecha.value && appValid) {
+
+				if (!telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && per.value && publicar.value && fecha.value && appValid) {
 					resumen.classList.remove("d-none");
 					editaBtn.classList.remove("d-none");
 					enviarBtn.classList.remove("d-none");
 					ocultarForm.classList.add("d-none");
 					continuarBtn.classList.add("d-none");
 					enrereBtn.classList.add("d-none");
+					alertError.classList.add("d-none");
+					appError.classList.add("d-none");
 				}
 			}
 
