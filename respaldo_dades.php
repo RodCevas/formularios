@@ -55,112 +55,118 @@ $fecha = $_POST['fecha']; */
 	<div class="container-fluid">
 		<?php require('../../cabecera.php'); ?>
 
-		<div id="resumen" class="row justify-content-center bg-light m-5 p-5 rounded d-none">
-			<div class="col-lg-8">
+		<div id="resumen" class="row justify-content-center bg-light m-5 p-2 rounded d-none">
+			<div class="col-8">
 				<div class="row">
-					<div class="col-lg-4"><strong>Resum</strong>:</div>
-					<div class="col-lg-8"></div>
+					<div class="col-4"><strong>Resum</strong>:</div>
+					<div class="col-8"></div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Nom Cognom1 Cognom2:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Nom Cognom1 Cognom2:</div>
+					<div class="col-8">
 						<p id="nomCognomPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Email:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Email:</div>
+					<div class="col-8">
 						<p id="emailPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Tel:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Tel:</div>
+					<div class="col-8">
 						<p id="telPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Sollicitud Externa:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Sollicitud Externa:</div>
+					<div class="col-8">
 						<p id="sollicitudExternaPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Petició:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Petició:</div>
+					<div class="col-8">
 						<p id="peticioPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Centre:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Centre:</div>
+					<div class="col-8">
 						<p id="centrePopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Justificacio:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Justificacio:</div>
+					<div class="col-8">
 						<p id="justificacioPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Per:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Per:</div>
+					<div class="col-8">
 						<p id="perPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Servei:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Servei:</div>
+					<div class="col-8">
 						<p id="serveiPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Periodicitat:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Periodicitat:</div>
+					<div class="col-8">
 						<p id="periodicitatPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Publicar:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Publicar:</div>
+					<div class="col-8">
 						<p id="publicarPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Aplicació:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Aplicació:</div>
+					<div class="col-8">
 						<p id="aplicacioPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Necessites:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Necessites:</div>
+					<div class="col-8">
 						<p id="necessitesPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Camps:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Camps:</div>
+					<div class="col-8">
 						<p id="campsPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Filtres:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Fitxers:</div>
+					<div class="col-8">
+						<p id="filesPopulated"></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-4">Filtres:</div>
+					<div class="col-8">
 						<p id="filtresPopulated"></p>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4">Fecha:</div>
-					<div class="col-lg-8">
+					<div class="col-4">Fecha:</div>
+					<div class="col-8">
 						<p id="fechaPopulated"></p>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<form method="POST" action="sist_informacio_resum.php" id="sistInformacioForm">
+		<form method="POST" action="sist_informacio_exit.php" id="sistInformacioForm">
 			<div id="ocultarForm">
 				<div id="alert-error" class="row my-5 justify-content-center d-none">
 					<div class="col-lg-8 p-3 fw-bold text-center bg-danger rounded">
@@ -174,9 +180,13 @@ $fecha = $_POST['fecha']; */
 					</div>
 					<div class="col-lg-4">
 						<input name="nomCognom" type="text" class="form-control" id="nomCognom" placeholder="Nom_Cognom1_Cognom2" value="<?php echo $nom_usu . " " . $cognom_usu ?>" disabled>
-
+						<div class="text-danger d-none">
+							Si us plau entre un valor
+						</div>
 						<input name="email" type="email" class="form-control" id="email" placeholder="usuari@bsa.cat" value="<?php echo $usuario; ?>@bsa.cat" disabled>
-
+						<div class="text-danger d-none">
+							Si us plau ingressi un correu electrònic vàlid.
+						</div>
 					</div>
 					<div class="col-lg-6 d-flex align-items-center">
 						<div class="form-check">
@@ -191,7 +201,7 @@ $fecha = $_POST['fecha']; */
 						<h6>Telef./Ext *</h6>
 					</div>
 					<div class="col-lg-4 mt-3">
-						<input name="tel" type="tel" class="form-control" id="tel" placeholder="Telef./Ext" maxlength="9">
+						<input name="tel" type="number" class="form-control" id="tel" placeholder="Telef./Ext" onKeyPress="if(this.value.length==9) return false;">
 						<div class="text-danger d-none">
 							El número de telèfon ha de ser de <strong>5 o 9</strong> dígits.
 						</div>
@@ -487,6 +497,15 @@ $fecha = $_POST['fecha']; */
 	<!-- JavaScript Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 	<script>
+		//prevenir que se envie el formulario si se presiona enter
+		document.querySelector('form').onkeypress = checkEnter;
+
+		function checkEnter(e) {
+			e = e || event;
+			var txtArea = /textarea/i.test((e.target || e.srcElement).tagName);
+			return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
+		}
+
 		var sistInformacioForm = document.getElementById("sistInformacioForm");
 
 		var resumen = document.getElementById("resumen");
@@ -512,6 +531,7 @@ $fecha = $_POST['fecha']; */
 		var publicar = document.getElementById("publicar");
 		var necessites = document.getElementById("necessites");
 		var camps = document.getElementById("camps");
+		var bfupload = document.getElementById("bfupload");
 		var filtres = document.getElementById("filtres");
 		var fecha = document.getElementById("fecha");
 
@@ -591,6 +611,7 @@ $fecha = $_POST['fecha']; */
 		function validacion() {
 
 			var telValidacio = tel.value.length < 5 || (tel.value.length > 5 && tel.value.length < 9) || tel.value.length > 9;
+			var emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 
 			peticio.forEach((item) => {
 				if (item.checked) {
@@ -598,6 +619,32 @@ $fecha = $_POST['fecha']; */
 					return;
 				}
 			});
+
+			if (!nomCognom.value) {
+				nomCognom.nextElementSibling.classList.remove("d-none");
+				nomCognom.classList.add("border-danger");
+				alertError.classList.remove("d-none");
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+			} else {
+				nomCognom.nextElementSibling.classList.add("d-none");
+				nomCognom.classList.remove("border-danger");
+			}
+
+			if (!email.value || !email.value.match(emailRegex)) {
+				email.nextElementSibling.classList.remove("d-none");
+				email.classList.add("border-danger");
+				alertError.classList.remove("d-none");
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+			} else {
+				email.nextElementSibling.classList.add("d-none");
+				email.classList.remove("border-danger");
+			}
 
 			if (telValidacio) {
 				tel.nextElementSibling.classList.remove("d-none");
@@ -609,7 +656,7 @@ $fecha = $_POST['fecha']; */
 				});
 			} else {
 				tel.nextElementSibling.classList.add("d-none");
-				tel.classList.remove("border-danger");				
+				tel.classList.remove("border-danger");
 			}
 
 			if (!centre.value) {
@@ -622,7 +669,7 @@ $fecha = $_POST['fecha']; */
 				});
 			} else {
 				centre.nextElementSibling.classList.add("d-none");
-				centre.classList.remove("border-danger");			
+				centre.classList.remove("border-danger");
 			}
 
 			if (!servei.value) {
@@ -635,7 +682,7 @@ $fecha = $_POST['fecha']; */
 				});
 			} else {
 				servei.nextElementSibling.classList.add("d-none");
-				servei.classList.remove("border-danger");			
+				servei.classList.remove("border-danger");
 			}
 
 			if (!periodicitat.value) {
@@ -648,7 +695,7 @@ $fecha = $_POST['fecha']; */
 				});
 			} else {
 				periodicitat.nextElementSibling.classList.add("d-none");
-				periodicitat.classList.remove("border-danger");				
+				periodicitat.classList.remove("border-danger");
 			}
 
 			if (!necessites.value) {
@@ -661,7 +708,7 @@ $fecha = $_POST['fecha']; */
 				});
 			} else {
 				necessites.nextElementSibling.classList.add("d-none");
-				necessites.classList.remove("border-danger");				
+				necessites.classList.remove("border-danger");
 			}
 
 			if (!camps.value) {
@@ -674,7 +721,7 @@ $fecha = $_POST['fecha']; */
 				});
 			} else {
 				camps.nextElementSibling.classList.add("d-none");
-				camps.classList.remove("border-danger");				
+				camps.classList.remove("border-danger");
 			}
 
 			if (!filtres.value) {
@@ -687,18 +734,16 @@ $fecha = $_POST['fecha']; */
 				});
 			} else {
 				filtres.nextElementSibling.classList.add("d-none");
-				filtres.classList.remove("border-danger");				
+				filtres.classList.remove("border-danger");
 			}
 
 			app.forEach((item) => {
 				if (item.checked) {
-					console.log('ok');
 					appError.classList.add("d-none");
 					appValueArray.push(item.value);
-					appValid = true;					
+					appValid = true;
 				}
 				if (!item.checked) {
-					console.log('error');
 					appError.classList.remove("d-none");
 					alertError.classList.remove("d-none");
 					window.scrollTo({
@@ -719,10 +764,10 @@ $fecha = $_POST['fecha']; */
 					});
 				} else {
 					gestioInternaError.classList.add("d-none");
-					justificacio.classList.remove("border-danger");					
+					justificacio.classList.remove("border-danger");
 				}
 
-				if (!telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && justificacio.value && appValid) {
+				if (email.value && email.value.match(emailRegex) && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && justificacio.value && appValid) {
 					resumen.classList.remove("d-none");
 					editaBtn.classList.remove("d-none");
 					enviarBtn.classList.remove("d-none");
@@ -744,7 +789,7 @@ $fecha = $_POST['fecha']; */
 					});
 				} else {
 					gestioInternaError.classList.add("d-none");
-					per.classList.remove("border-danger");					
+					per.classList.remove("border-danger");
 				}
 
 				if (!publicar.value) {
@@ -757,7 +802,7 @@ $fecha = $_POST['fecha']; */
 					});
 				} else {
 					publicar.nextElementSibling.classList.add("d-none");
-					publicar.classList.remove("border-danger");					
+					publicar.classList.remove("border-danger");
 				}
 
 				if (!fecha.value) {
@@ -770,10 +815,10 @@ $fecha = $_POST['fecha']; */
 					});
 				} else {
 					fecha.nextElementSibling.classList.add("d-none");
-					fecha.classList.remove("border-danger");					
+					fecha.classList.remove("border-danger");
 				}
 
-				if (!telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && per.value && publicar.value && fecha.value && appValid) {
+				if (email.value && email.value.match(emailRegex) && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && per.value && publicar.value && fecha.value && appValid) {
 					resumen.classList.remove("d-none");
 					editaBtn.classList.remove("d-none");
 					enviarBtn.classList.remove("d-none");
@@ -786,6 +831,22 @@ $fecha = $_POST['fecha']; */
 			}
 
 			// resumen
+
+			var txtFiles = "";
+
+			if ('files' in bfupload) {
+				for (var i = 0; i < bfupload.files.length; i++) {
+					var file = bfupload.files[i];
+					if ('name' in file) {
+						txtFiles += "name: " + file.name + " ";
+					}
+					if ('size' in file) {
+						txtFiles += "size: " + file.size + " bytes <br>";
+					}
+				}
+			}
+
+
 			document.getElementById("nomCognomPopulated").innerHTML = nomCognom.value ? nomCognom.value : 'N/A';
 			document.getElementById("emailPopulated").innerHTML = email.value ? email.value : 'N/A';
 			document.getElementById("telPopulated").innerHTML = tel.value ? tel.value : 'N/A';
@@ -802,6 +863,9 @@ $fecha = $_POST['fecha']; */
 			document.getElementById("campsPopulated").innerHTML = camps.value ? camps.value : 'N/A';
 			document.getElementById("filtresPopulated").innerHTML = filtres.value ? filtres.value : 'N/A';
 			document.getElementById("fechaPopulated").innerHTML = fecha.value ? fecha.value : 'N/A';
+			document.getElementById("filesPopulated").innerHTML = txtFiles ? txtFiles : 'N/A';
+
+
 
 		}
 	</script>
