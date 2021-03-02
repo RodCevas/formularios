@@ -7,7 +7,7 @@ require('../../conecta_sap.php');
 $new_postg = conectabdpgsql(BD_SERVIDOR_POSTGES, BD_PORT_POSTGES, BD_NOM_POSTGES, BD_USUARI_POSTGES, BD_CLAU_POSTGES, 1);	//Nuevo Prostgres
 
 $usuario = str_replace("@BSA.ES", '', $_SERVER['REMOTE_USER']);
-$titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
+$titulo_web 	= "Petició d'Dades a TI";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -147,30 +147,28 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 			</div>
 		</div>
 
-		<!-- 		<button id="errorBtn" type="button" class="d-none" data-bs-toggle="modal" data-bs-target="#errorModal"></button>	
-		<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content bg-danger text-light">
-					<div class="modal-header">
-						<h6></h6>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body text-center">
-						<h4>Si us plau ompli els camps obligatoris.</h4>
-					</div>
-				</div>
-			</div>
-		</div> -->
+		<div class="toast fixed-top mx-auto my-5 bg-danger text-light" role="alert" aria-live="assertive" aria-atomic="true">
 
-		<!-- <button type="button" class="btn btn-primary" id="liveToastBtn" onclick="mostrarErrorToast()">Show live toast</button> -->
 
-		<div class="toast align-items-center fixed-top mx-auto my-5 bg-danger text-light" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="d-flex">
-				<div class="toast-body">
-					<strong>Si us plau ompli els camps obligatoris.</strong>
-				</div>
-				<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+			<img class="img-fluid m-3 float-end" data-bs-dismiss="toast" aria-label="Close" src="../../../../recursos/imagenes/blade_white.png" style='width:20px;cursor:pointer;'>
+
+			<div class="toast-body">
+				<p id="nomCognomError" class="d-none">Falta omplir el camp 'Nom Cognom'</p>
+				<p id="emailError" class="d-none">Si us plau ingressi un correu electrònic vàlid.</p>
+				<p id="telError" class="d-none">El número de telèfon ha de ser de 5 o 9 dígits.</p>
+				<p id="centreError" class="d-none">Falta omplir el camp 'Tria el Centre'</p>
+				<p id="serveiError" class="d-none">Falta omplir el camp 'Tria el servei'</p>
+				<p id="justificacioError" class="d-none">Falta omplir el camp 'Justificacio'</p>
+				<p id="perError" class="d-none">Falta omplir el camp 'Per'</p>
+				<p id="periodicitatError" class="d-none">Falta omplir el camp 'Periodicitat'</p>
+				<p id="publicarError" class="d-none">Falta omplir el camp 'Publicar'</p>
+				<p id="aplicacioError" class="d-none">Falta omplir el camp 'Aplicació'</p>
+				<p id="necessitesError" class="d-none">Falta omplir el camp 'Necessites'</p>
+				<p id="campsError" class="d-none">Falta omplir el camp 'Camps'</p>
+				<p id="filtresError" class="d-none">Falta omplir el camp 'Filtres'</p>
+				<p id="fechaError" class="d-none">Falta omplir el camp 'Fecha'</p>
 			</div>
+
 		</div>
 
 
@@ -190,17 +188,10 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 					</div>
 					<div class="col-lg-4">
 						<input name="nomCognom" type="text" class="form-control" id="nomCognom" placeholder="Nom_Cognom1_Cognom2" value="<?php echo $nom_usu . " " . $cognom_usu ?>" disabled>
-						<div class="text-danger d-none">
-							Si us plau entre un valor
-						</div>
 						<div class="input-group">
 							<input name="email" type="email" class="form-control" id="email" placeholder="usuari@bsa.cat" value="<?php echo $usuario; ?>" aria-describedby="basic-addon2" disabled>
 							<span class="input-group-text" id="basic-addon2">@bsa.cat</span>
-							<div class="text-danger d-none">
-								Si us plau ingressi un correu electrònic vàlid.
-							</div>
 						</div>
-
 					</div>
 					<div class="col-lg-6 d-flex align-items-center">
 						<div class="form-check d-flex">
@@ -216,9 +207,6 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 					</div>
 					<div class="col-lg-4 mt-3">
 						<input name="tel" type="number" class="form-control" id="tel" placeholder="Telef./Ext" onKeyPress="if(this.value.length==9) return false;">
-						<div class="text-danger d-none">
-							El número de telèfon ha de ser de <strong>5 o 9</strong> dígits.
-						</div>
 					</div>
 					<div class="col-lg-6 d-flex align-items-center mt-3">
 						<div class="form-check d-flex">
@@ -263,9 +251,6 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 									}
 									?>
 								</select>
-								<div class="text-danger d-none">
-									Si us plau entre un valor
-								</div>
 							</div>
 
 							<div class="col-lg-2 d-flex justify-content-center align-items-center">
@@ -281,18 +266,12 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 									<option value="IQF">IQF</option>
 									<option value="Altres">Altres</option>
 								</select>
-								<div id="gestioInterna-error" class="text-danger d-none">
-									Si us plau entre un valor
-								</div>
 								<select name="per" id="per" class="select recerca d-none invisible" aria-label="Default select example" style="width: 100%;">
 									<option value="" selected hidden>Per</option>
 									<option value="Publicació_a_congressos">Publicació a congressos</option>
 									<option value="Publicació_a_revistes">Publicació a revistes</option>
 									<option value="Per_documentació">Per documentació (tesis, tesines)</option>
 								</select>
-								<div id="recerca-error" class="text-danger d-none">
-									Si us plau entre un valor
-								</div>
 							</div>
 
 						</div>
@@ -309,9 +288,6 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 									}
 									?>
 								</select>
-								<div class="text-danger d-none">
-									Si us plau entre un valor
-								</div>
 							</div>
 							<div class="col-lg-2 d-flex justify-content-center align-items-center">
 								<h6>Periodicitat *</h6>
@@ -328,9 +304,6 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 									<option value="Semestral">Semestral</option>
 									<option value="Anual">Anual</option>
 								</select>
-								<div class="text-danger d-none">
-									Si us plau entre un valor
-								</div>
 							</div>
 						</div>
 					</div>
@@ -344,9 +317,6 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 							</div>
 							<div class="col-lg-8">
 								<textarea name="publicar" class="form-control" id="publicar" rows="1"></textarea>
-								<div class="text-danger d-none">
-									Si us plau entre un valor
-								</div>
 							</div>
 						</div>
 					</div>
@@ -423,11 +393,6 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 									</label>
 								</div>
 							</div>
-							<div class="col-lg-12 text-center">
-								<div id="app-error" class="text-danger d-none">
-									Si us plau seleccioneu un camp.
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -438,27 +403,18 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 							<h6>Indica'ns que necessites *</h6>
 						</label>
 						<textarea name="necessites" class="form-control" id="necessites" rows="1"></textarea>
-						<div class="text-danger d-none">
-							Si us plau entre un valor
-						</div>
 					</div>
 					<div class="col-lg-6 my-3">
 						<label for="camps" class="form-label">
 							<h6>Indica'ns quins camps necessites *</h6>
 						</label>
 						<textarea name="camps" class="form-control" id="camps" rows="1"></textarea>
-						<div class="text-danger d-none">
-							Si us plau entre un valor
-						</div>
 					</div>
 					<div class="col-lg-6 my-3">
 						<label for="filtres" class="form-label">
 							<h6>Indica'ns quins filtres necessites *</h6>
 						</label>
 						<textarea name="filtres" class="form-control" id="filtres" rows="1"></textarea>
-						<div class="text-danger d-none">
-							Si us plau entre un valor
-						</div>
 					</div>
 					<div class="col-lg-6">
 						<div class="row">
@@ -479,9 +435,6 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 							</div>
 							<div class="col-lg-12 my-3">
 								<input type="date" id="fecha" name="fecha">
-								<div class="text-danger d-none">
-									Si us plau entre un valor
-								</div>
 							</div>
 						</div>
 					</div>
@@ -529,10 +482,21 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 		var resumen = document.getElementById("resumen");
 		var ocultarForm = document.getElementById("ocultarForm");
 
-		var gestioInternaError = document.getElementById("gestioInterna-error");
-		var recercaError = document.getElementById("recerca-error");
-		var appError = document.getElementById("app-error");
-		var telNumero = document.getElementById("telNumero");
+		// get msg errors		
+		var nomCognomError = document.getElementById("nomCognomError");
+		var emailError = document.getElementById("emailError");
+		var telError = document.getElementById("telError");
+		var centreError = document.getElementById("centreError");
+		var serveiError = document.getElementById("serveiError");
+		var justificacioError = document.getElementById("justificacioError");
+		var perError = document.getElementById("perError");
+		var periodicitatError = document.getElementById("periodicitatError");
+		var publicarError = document.getElementById("publicarError");
+		var aplicacioError = document.getElementById("aplicacioError");
+		var necessitesError = document.getElementById("necessitesError");
+		var campsError = document.getElementById("campsError");
+		var filtresError = document.getElementById("filtresError");
+		var fechaError = document.getElementById("fechaError");
 
 		var nomCognom = document.getElementById("nomCognom");
 		var email = document.getElementById("email");
@@ -556,7 +520,6 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 		var peticioSelected;
 
 		var app = document.querySelectorAll(".app");
-		var appValid = false;
 		var appValueArray = [];
 
 		var editaBtn = document.getElementById("editaBtn");
@@ -626,15 +589,15 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 
 
 
-			var options = {
-				animation: true,
-				delay: 5000
-			};
-			var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-			var toastList = toastElList.map(function(toastEl) {
-				return new bootstrap.Toast(toastEl, options)
-			})
-			
+		var options = {
+			animation: true,
+			delay: 5000
+		};
+		var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+		var toastList = toastElList.map(function(toastEl) {
+			return new bootstrap.Toast(toastEl, options)
+		})
+
 
 
 
@@ -653,225 +616,208 @@ $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
 			});
 
 			if (!nomCognom.value) {
-				nomCognom.nextElementSibling.classList.remove("d-none");
-				nomCognom.classList.add("border-danger");
+				nomCognomError.classList.remove("d-none");
 				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
 				});
 			} else {
-				nomCognom.nextElementSibling.classList.add("d-none");
-				nomCognom.classList.remove("border-danger");
+				nomCognomError.classList.add("d-none");
 				toastList[0].hide();
 			}
 
 			if (!email.value) {
-				email.nextElementSibling.classList.remove("d-none");
-				email.classList.add("border-danger");
+				emailError.classList.remove("d-none");
 				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
 				});
 			} else {
-				email.nextElementSibling.classList.add("d-none");
-				email.classList.remove("border-danger");
+				emailError.classList.add("d-none");
 				toastList[0].hide();
 			}
 
 			if (telValidacio) {
-				tel.nextElementSibling.classList.remove("d-none");
-				tel.classList.add("border-danger");
+				telError.classList.remove("d-none");
 				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
 				});
 			} else {
-				tel.nextElementSibling.classList.add("d-none");
-				tel.classList.remove("border-danger");
+				telError.classList.add("d-none");
 				toastList[0].hide();
 			}
 
 			if (!centre.value) {
-				centre.nextElementSibling.classList.remove("d-none");
-				centre.classList.add("border-danger");
+				centreError.classList.remove("d-none");
 				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
 				});
 			} else {
-				centre.nextElementSibling.classList.add("d-none");
-				centre.classList.remove("border-danger");
+				centreError.classList.add("d-none");
 				toastList[0].hide();
 			}
 
 			if (!servei.value) {
-				servei.nextElementSibling.classList.remove("d-none");
-				servei.classList.add("border-danger");
+				serveiError.classList.remove("d-none");
 				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
 				});
 			} else {
-				servei.nextElementSibling.classList.add("d-none");
-				servei.classList.remove("border-danger");
+				serveiError.classList.add("d-none");
 				toastList[0].hide();
 			}
 
 			if (!periodicitat.value) {
-				periodicitat.nextElementSibling.classList.remove("d-none");
-				periodicitat.classList.add("border-danger");
+				periodicitatError.classList.remove("d-none");
 				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
 				});
 			} else {
-				periodicitat.nextElementSibling.classList.add("d-none");
-				periodicitat.classList.remove("border-danger");
+				periodicitatError.classList.add("d-none");
 				toastList[0].hide();
 			}
 
 			if (!necessites.value) {
-				necessites.nextElementSibling.classList.remove("d-none");
-				necessites.classList.add("border-danger");
+				necessitesError.classList.remove("d-none");
 				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
 				});
 			} else {
-				necessites.nextElementSibling.classList.add("d-none");
-				necessites.classList.remove("border-danger");
+				necessitesError.classList.add("d-none");
 				toastList[0].hide();
 			}
 
 			if (!camps.value) {
-				camps.nextElementSibling.classList.remove("d-none");
-				camps.classList.add("border-danger");
+				campsError.classList.remove("d-none");
 				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
 				});
 			} else {
-				camps.nextElementSibling.classList.add("d-none");
-				camps.classList.remove("border-danger");
+				campsError.classList.add("d-none");
 				toastList[0].hide();
 			}
 
 			if (!filtres.value) {
-				filtres.nextElementSibling.classList.remove("d-none");
-				filtres.classList.add("border-danger");
+				filtresError.classList.remove("d-none");
 				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
 				});
 			} else {
-				filtres.nextElementSibling.classList.add("d-none");
-				filtres.classList.remove("border-danger");
+				filtresError.classList.add("d-none");
 				toastList[0].hide();
 			}
 
+			//push to array checked values aplicació
 			app.forEach((item) => {
-				if (item.checked) {
-					appError.classList.add("d-none");
-					appValueArray.push(item.value);
-					appValid = true;
-					toastList[0].hide();
-				}
-				if (!item.checked) {
-					appError.classList.remove("d-none");
-					toastList[0].show();
-					window.scrollTo({
-						top: 0,
-						behavior: 'smooth'
-					});
-				}
+				if (item.checked) {					
+					appValueArray.push(item.value);					
+					
+				} 
 			});
+
+			//validacion aplicació
+			var appValid = 0;
+			for (j = 0; j < app.length; j++) {
+				if (app.item(j).checked == false) {
+					appValid++;
+				}
+			}
+			if (appValid == app.length) {
+				aplicacioError.classList.remove("d-none");
+				toastList[0].show();
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+				return false;
+			} else {
+				aplicacioError.classList.add("d-none");
+				toastList[0].hide();
+			}
 
 			if (gestioInterna.checked) {
 				if (!justificacio.value) {
-					gestioInternaError.classList.remove("d-none");
-					justificacio.classList.add("border-danger");
+					justificacioError.classList.remove("d-none");
 					toastList[0].show();
 					window.scrollTo({
 						top: 0,
 						behavior: 'smooth'
 					});
 				} else {
-					gestioInternaError.classList.add("d-none");
-					justificacio.classList.remove("border-danger");
+					justificacioError.classList.add("d-none");
 					toastList[0].hide();
 				}
 
-				if (email.value && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && justificacio.value && appValid) {
+				if (email.value && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && justificacio.value && appValid > 0) {
 					resumen.classList.remove("d-none");
 					editaBtn.classList.remove("d-none");
 					enviarBtn.classList.remove("d-none");
 					ocultarForm.classList.add("d-none");
 					continuarBtn.classList.add("d-none");
 					enrereBtn.classList.add("d-none");
-					appError.classList.add("d-none");
 					toastList[0].hide();
 				}
 			}
 			if (recerca.checked) {
 				if (!per.value) {
-					gestioInternaError.classList.remove("d-none");
-					per.classList.add("border-danger");
+					perError.classList.remove("d-none");
 					toastList[0].show();
 					window.scrollTo({
 						top: 0,
 						behavior: 'smooth'
 					});
 				} else {
-					gestioInternaError.classList.add("d-none");
-					per.classList.remove("border-danger");
+					perError.classList.add("d-none");
 					toastList[0].hide();
 				}
 
 				if (!publicar.value) {
-					publicar.nextElementSibling.classList.remove("d-none");
-					publicar.classList.add("border-danger");
+					publicarError.classList.remove("d-none");
 					toastList[0].show();
 					window.scrollTo({
 						top: 0,
 						behavior: 'smooth'
 					});
 				} else {
-					publicar.nextElementSibling.classList.add("d-none");
-					publicar.classList.remove("border-danger");
+					publicarError.classList.add("d-none");
 					toastList[0].hide();
 				}
 
 				if (!fecha.value) {
-					fecha.nextElementSibling.classList.remove("d-none");
-					fecha.classList.add("border-danger");
+					fechaError.classList.remove("d-none");
 					toastList[0].show();
 					window.scrollTo({
 						top: 0,
 						behavior: 'smooth'
 					});
 				} else {
-					fecha.nextElementSibling.classList.add("d-none");
-					fecha.classList.remove("border-danger");
+					fechaError.classList.add("d-none");
 					toastList[0].hide();
 				}
 
-				if (email.value && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && per.value && publicar.value && fecha.value && appValid) {
+				if (email.value && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && per.value && publicar.value && fecha.value && appValid > 0) {
 					resumen.classList.remove("d-none");
 					editaBtn.classList.remove("d-none");
 					enviarBtn.classList.remove("d-none");
 					ocultarForm.classList.add("d-none");
 					continuarBtn.classList.add("d-none");
 					enrereBtn.classList.add("d-none");
-					appError.classList.add("d-none");
 					toastList[0].hide();
 				}
 			}
