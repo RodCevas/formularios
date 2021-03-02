@@ -176,12 +176,6 @@ $titulo_web 	= "Petició d'Dades a TI";
 		<form method="POST" action="sist_informacio_exit.php" id="sistInformacioForm">
 			<div id="ocultarForm">
 
-				<!-- 				<div id="alert-error" class="row my-5 justify-content-center d-none">
-					<div class="col-lg-8 p-3 fw-bold text-center bg-danger rounded">
-						Si us plau ompli els camps obligatoris.
-					</div>
-				</div> -->
-
 				<div class="row bg-light m-5 p-3 rounded">
 					<div class="col-lg-2 d-flex justify-content-center align-items-center">
 						<h6>Hola!</h6>
@@ -189,8 +183,8 @@ $titulo_web 	= "Petició d'Dades a TI";
 					<div class="col-lg-4">
 						<input name="nomCognom" type="text" class="form-control" id="nomCognom" placeholder="Nom_Cognom1_Cognom2" value="<?php echo $nom_usu . " " . $cognom_usu ?>" disabled>
 						<div class="input-group">
-							<input name="email" type="email" class="form-control" id="email" placeholder="usuari@bsa.cat" value="<?php echo $usuario; ?>" aria-describedby="basic-addon2" disabled>
-							<span class="input-group-text" id="basic-addon2">@bsa.cat</span>
+							<input name="email" type="email" class="form-control" id="email" placeholder="usuari@bsa.cat" value="<?php echo $usuario; ?>@bsa.cat" disabled>
+							
 						</div>
 					</div>
 					<div class="col-lg-6 d-flex align-items-center">
