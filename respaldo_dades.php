@@ -601,6 +601,7 @@ $titulo_web 	= "Petició d'Dades a TI";
 		function validacion() {
 
 			var telValidacio = tel.value.length < 5 || (tel.value.length > 5 && tel.value.length < 9) || tel.value.length > 9;
+			var emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 
 			peticio.forEach((item) => {
 				if (item.checked) {
@@ -621,7 +622,7 @@ $titulo_web 	= "Petició d'Dades a TI";
 				toastList[0].hide();
 			}
 
-			if (!email.value) {
+			if (!email.value || !email.value.match(emailRegex)) {
 				emailError.classList.remove("d-none");
 				toastList[0].show();
 				window.scrollTo({
@@ -758,7 +759,7 @@ $titulo_web 	= "Petició d'Dades a TI";
 					toastList[0].hide();
 				}
 
-				if (email.value && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && justificacio.value && appValid > 0) {
+				if (email.value && email.value.match(emailRegex) && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && justificacio.value && appValid > 0) {
 					resumen.classList.remove("d-none");
 					editaBtn.classList.remove("d-none");
 					enviarBtn.classList.remove("d-none");
@@ -805,7 +806,7 @@ $titulo_web 	= "Petició d'Dades a TI";
 					toastList[0].hide();
 				}
 
-				if (email.value && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && per.value && publicar.value && fecha.value && appValid > 0) {
+				if (email.value && email.value.match(emailRegex) && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && per.value && publicar.value && fecha.value && appValid > 0) {
 					resumen.classList.remove("d-none");
 					editaBtn.classList.remove("d-none");
 					enviarBtn.classList.remove("d-none");
