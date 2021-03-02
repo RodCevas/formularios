@@ -8,25 +8,6 @@ $new_postg = conectabdpgsql(BD_SERVIDOR_POSTGES, BD_PORT_POSTGES, BD_NOM_POSTGES
 
 $usuario = str_replace("@BSA.ES", '', $_SERVER['REMOTE_USER']);
 $titulo_web 	= "Sol·licitud de Dades a Tècnologies de la Informació";
-
-/* $nomCognom = $_POST['nomCognom']; */
-/* $email = $_POST['email'];
-$tel = $_POST['tel'];
-$sollicitudExterna = $_POST['sollicitudExterna'];
-$gestioInterna = $_POST['gestioInternav'];
-$recerca = $_POST['recerca'];
-$centre = $_POST['centre'];
-$justificacio = $_POST['justificacio'];
-$per = $_POST['per'];
-$servei = $_POST['servei'];
-$periodicitat = $_POST['periodicitat'];
-$publicar = $_POST['publicar'];
-$checkArr[] = $_POST['checkArr[]'];
-$necessites = $_POST['necessites'];
-$camps = $_POST['camps'];
-$filtres = $_POST['filtres'];
-$bfupload[] = $_POST['bfupload[]'];
-$fecha = $_POST['fecha']; */
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -166,15 +147,44 @@ $fecha = $_POST['fecha']; */
 			</div>
 		</div>
 
+		<!-- 		<button id="errorBtn" type="button" class="d-none" data-bs-toggle="modal" data-bs-target="#errorModal"></button>	
+		<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content bg-danger text-light">
+					<div class="modal-header">
+						<h6></h6>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body text-center">
+						<h4>Si us plau ompli els camps obligatoris.</h4>
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+		<!-- <button type="button" class="btn btn-primary" id="liveToastBtn" onclick="mostrarErrorToast()">Show live toast</button> -->
+
+		<div class="toast align-items-center fixed-top mx-auto my-5 bg-danger text-light" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="d-flex">
+				<div class="toast-body">
+					<strong>Si us plau ompli els camps obligatoris.</strong>
+				</div>
+				<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+		</div>
+
+
+
 		<form method="POST" action="sist_informacio_exit.php" id="sistInformacioForm">
 			<div id="ocultarForm">
-				<div id="alert-error" class="row my-5 justify-content-center d-none">
+
+				<!-- 				<div id="alert-error" class="row my-5 justify-content-center d-none">
 					<div class="col-lg-8 p-3 fw-bold text-center bg-danger rounded">
 						Si us plau ompli els camps obligatoris.
 					</div>
-				</div>
+				</div> -->
 
-				<div class="row bg-light m-5 p-5 rounded">
+				<div class="row bg-light m-5 p-3 rounded">
 					<div class="col-lg-2 d-flex justify-content-center align-items-center">
 						<h6>Hola!</h6>
 					</div>
@@ -183,14 +193,18 @@ $fecha = $_POST['fecha']; */
 						<div class="text-danger d-none">
 							Si us plau entre un valor
 						</div>
-						<input name="email" type="email" class="form-control" id="email" placeholder="usuari@bsa.cat" value="<?php echo $usuario; ?>@bsa.cat" disabled>
-						<div class="text-danger d-none">
-							Si us plau ingressi un correu electrònic vàlid.
+						<div class="input-group">
+							<input name="email" type="email" class="form-control" id="email" placeholder="usuari@bsa.cat" value="<?php echo $usuario; ?>" aria-describedby="basic-addon2" disabled>
+							<span class="input-group-text" id="basic-addon2">@bsa.cat</span>
+							<div class="text-danger d-none">
+								Si us plau ingressi un correu electrònic vàlid.
+							</div>
 						</div>
+
 					</div>
 					<div class="col-lg-6 d-flex align-items-center">
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="usuari" onclick=modifica_usuari()>
+						<div class="form-check d-flex">
+							<input class="option-input checkbox" type="checkbox" value="" id="usuari" onclick=modifica_usuari()>
 							<label class="form-check-label" for="usuari">
 								Si no ets la persona correcta, si us plau, fes click aquí
 							</label>
@@ -207,8 +221,8 @@ $fecha = $_POST['fecha']; */
 						</div>
 					</div>
 					<div class="col-lg-6 d-flex align-items-center mt-3">
-						<div class="form-check">
-							<input name="sollicitudExterna" class="form-check-input" type="checkbox" value="sollicitudExterna" id="sollicitudExterna">
+						<div class="form-check d-flex">
+							<input name="sollicitudExterna" class="option-input checkbox" type="checkbox" value="sollicitudExterna" id="sollicitudExterna">
 							<label class="form-check-label" for="solExt">
 								Si és una sol·licitud externa, si us plau, fes click aquí
 							</label>
@@ -216,16 +230,16 @@ $fecha = $_POST['fecha']; */
 					</div>
 				</div>
 
-				<div class="row bg-light m-5 p-5 rounded">
+				<div class="row bg-light m-5 p-3 rounded">
 					<div class="col-lg-12 text-center">
 						<div class="form-check form-check-inline">
-							<input class="form-check-input peticio" type="radio" name="peticio" id="gestioInterna" value="gestioInterna" onclick="mostrarOcultar()">
+							<input class="option-input radio peticio" type="radio" name="peticio" id="gestioInterna" value="gestioInterna" onclick="mostrarOcultar()">
 							<label class="form-check-label" for="gestioInterna">
 								<h6>Gestió Interna</h6>
 							</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input peticio" type="radio" name="peticio" id="recerca" value="recerca" onclick="mostrarOcultar()">
+							<input class="option-input radio peticio" type="radio" name="peticio" id="recerca" value="recerca" onclick="mostrarOcultar()">
 							<label class="form-check-label" for="recerca">
 								<h6>Recerca</h6>
 							</label>
@@ -233,15 +247,15 @@ $fecha = $_POST['fecha']; */
 					</div>
 				</div>
 
-				<div class="row bg-light m-5 p-5 rounded mostrar d-none invisible">
+				<div class="row bg-light m-5 p-3 rounded mostrar d-none invisible">
 					<div class="col-lg-12 fw-bold text-danger text-center recerca d-none invisible">“Abans de cursar aquesta sol·licitud, recorda que cal haver presentat el protocol d'estudi al Comitè de Recerca”</div>
 					<div class="col-lg-12">
 						<div class="row my-5">
 							<div class="col-lg-2 d-flex justify-content-center align-items-center">
 								<h6>Tria el centre *</h6>
 							</div>
-							<div class="col-lg-4">
-								<select name="centre" id="centre" class="form-select" aria-label="Default select example">
+							<div class="col-lg-4 align-items-center">
+								<select name="centre" id="centre" class="select" style="width: 100%;" aria-label="Default select example">
 									<option value="" selected hidden>Centre</option>
 									<?php
 									for ($i = 1; $i < count($centres_SAP); $i++) {
@@ -259,7 +273,7 @@ $fecha = $_POST['fecha']; */
 								<h6 class="recerca d-none">Per *</h6>
 							</div>
 							<div class="col-lg-4">
-								<select name="justificacio" id="justificacio" class="form-select gestioInterna d-none invisible" aria-label="Default select example">
+								<select name="justificacio" id="justificacio" class="select gestioInterna d-none invisible" aria-label="Default select example" style="width: 100%;">
 									<option value="" selected hidden>Justificació</option>
 									<option value="Gestió_interna_del_Servei_Unitat">Gestió interna del Servei / Unitat</option>
 									<option value="Pla_de_Salut_o_similars">Pla de Salut o similars</option>
@@ -270,7 +284,7 @@ $fecha = $_POST['fecha']; */
 								<div id="gestioInterna-error" class="text-danger d-none">
 									Si us plau entre un valor
 								</div>
-								<select name="per" id="per" class="form-select recerca d-none invisible" aria-label="Default select example">
+								<select name="per" id="per" class="select recerca d-none invisible" aria-label="Default select example" style="width: 100%;">
 									<option value="" selected hidden>Per</option>
 									<option value="Publicació_a_congressos">Publicació a congressos</option>
 									<option value="Publicació_a_revistes">Publicació a revistes</option>
@@ -287,7 +301,7 @@ $fecha = $_POST['fecha']; */
 								<h6>Tria el servei *</h6>
 							</div>
 							<div class="col-lg-4">
-								<select name="servei" id="servei" class="form-select" aria-label="Default select example">
+								<select name="servei" id="servei" class="select" aria-label="Default select example" style="width: 100%;">
 									<option value="" selected hidden>Servei</option>
 									<?php
 									for ($i = 1; $i < count($serveis_SAP); $i++) {
@@ -303,7 +317,7 @@ $fecha = $_POST['fecha']; */
 								<h6>Periodicitat *</h6>
 							</div>
 							<div class="col-lg-4">
-								<select name="periodicitat" id="periodicitat" class="form-select" aria-label="Default select example">
+								<select name="periodicitat" id="periodicitat" class="select" aria-label="Default select example" style="width: 100%;">
 									<option value="" selected hidden>Periodicitat</option>
 									<option value="Només_ara">Només ara</option>
 									<option value="Setmanal">Setmanal</option>
@@ -342,65 +356,68 @@ $fecha = $_POST['fecha']; */
 							<div class="col-lg-12 text-center my-3">
 								<h6>Especifica de quina aplicació necessites les dades. Poden haver-hi múltiples seleccions. *</h6>
 							</div>
-							<div class="row d-flex justify-content-center align-items-center my-3">
-								<div class="col-md-2 form-check">
-									<input name="app[]" class="form-check-input app" type="checkbox" value="FormularisWeb" id="FormularisWeb">
+							<div class="row my-3">
+								<div class="col-md-3 text-center d-flex my-2">
+									<input name="app[]" class="option-input checkbox app" type="checkbox" value="FormularisWeb" id="FormularisWeb">
 									<label class="form-check-label" for="FormularisWeb">
 										Formularis web
 									</label>
 								</div>
-								<div class="col-md-2 form-check">
-									<input name="app[]" class="form-check-input app" type="checkbox" value="gesdohc" id="gesdohc">
+								<div class="col-md-3 text-center d-flex my-2">
+									<input name="app[]" class="option-input checkbox app" type="checkbox" value="gesdohc" id="gesdohc">
 									<label class="form-check-label" for="gesdohc">
 										Gesdohc
 									</label>
 								</div>
-								<div class="col-md-2 form-check">
-									<input name="app[]" class="form-check-input app" type="checkbox" value="ecap" id="ecap">
+								<div class="col-md-3 text-center d-flex my-2">
+									<input name="app[]" class="option-input checkbox app" type="checkbox" value="ecap" id="ecap">
 									<label class="form-check-label" for="ecap">
 										Ecap
 									</label>
 								</div>
-								<div class="col-md-2 form-check">
-									<input name="app[]" class="form-check-input app" type="checkbox" value="tesis" id="tesis">
+								<div class="col-md-3 text-center d-flex my-2">
+									<input name="app[]" class="option-input checkbox app" type="checkbox" value="tesis" id="tesis">
 									<label class="form-check-label" for="tesis">
 										Tesis
 									</label>
 								</div>
-								<div class="col-md-2 form-check">
-									<input name="app[]" class="form-check-input app" type="checkbox" value="omi" id="omi">
+							</div>
+							<div class="row my-3">
+								<div class="col-md-3 text-center d-flex my-2">
+									<input name="app[]" class="option-input checkbox app" type="checkbox" value="omi" id="omi">
 									<label class="form-check-label" for="omi">
 										Omi
 									</label>
 								</div>
-							</div>
-							<div class="row d-flex justify-content-center align-items-center my-3">
-								<div class="col-md-2 form-check">
-									<input name="app[]" class="form-check-input app" type="checkbox" value="silicon" id="silicon">
+
+								<div class="col-md-3 text-center d-flex my-2">
+									<input name="app[]" class="option-input checkbox app" type="checkbox" value="silicon" id="silicon">
 									<label class="form-check-label" for="silicon">
 										Silicon
 									</label>
 								</div>
-								<div class="col-md-2 form-check">
-									<input name="app[]" class="form-check-input app" type="checkbox" value="taonet" id="taonet">
+								<div class="col-md-3 text-center d-flex my-2">
+									<input name="app[]" class="option-input checkbox app" type="checkbox" value="taonet" id="taonet">
 									<label class="form-check-label" for="taonet">
 										Taonet
 									</label>
 								</div>
-								<div class="col-md-2 form-check">
-									<input name="app[]" class="form-check-input app" type="checkbox" value="sisdi" id="sisdi">
+								<div class="col-md-3 text-center d-flex my-2">
+									<input name="app[]" class="option-input checkbox app" type="checkbox" value="sisdi" id="sisdi">
 									<label class="form-check-label" for="sisdi">
 										Sisdi
 									</label>
 								</div>
-								<div class="col-md-2 form-check">
-									<input name="app[]" class="form-check-input app" type="checkbox" value="sap" id="sap">
+							</div>
+							<div class="row my-3">
+								<div class="col-md-3 text-center d-flex my-2">
+									<input name="app[]" class="option-input checkbox app" type="checkbox" value="sap" id="sap">
 									<label class="form-check-label" for="sap">
 										SAP
 									</label>
 								</div>
-								<div class="col-md-2 form-check">
-									<input name="app[]" class="form-check-input app" type="checkbox" value="altres" id="altres">
+								<div class="col-md-3 text-center d-flex my-2">
+									<input name="app[]" class="option-input checkbox app" type="checkbox" value="altres" id="altres">
 									<label class="form-check-label" for="altres">
 										Altres
 									</label>
@@ -415,7 +432,7 @@ $fecha = $_POST['fecha']; */
 					</div>
 				</div>
 
-				<div class="row bg-light m-5 p-5 rounded mostrar d-none invisible">
+				<div class="row bg-light m-5 p-3 rounded mostrar d-none invisible">
 					<div class="col-lg-12 my-3">
 						<label for="necessites" class="form-label">
 							<h6>Indica'ns que necessites *</h6>
@@ -472,13 +489,13 @@ $fecha = $_POST['fecha']; */
 
 				</div>
 			</div>
-			<div class="row bg-light m-5 p-5 rounded">
+			<div class="row bg-light m-5 p-3 rounded">
 				<div class="col-md-4 text-center">
-					<button type="button" class="btn btn-danger px-4 m-2" onclick="window.location='http://seradev.bsa.es/serveisgenerals/informatica/formulari_ti/menu.php'">Sortir</button>
+					<button type="button" class="btn btn-primary px-4 m-2" onclick="window.location='http://seradev.bsa.es/serveisgenerals/informatica/formulari_ti/menu.php'">Sortir</button>
 				</div>
 				<div class="col-md-4 text-center">
-					<button id="enrereBtn" type="button" class="btn btn-secondary px-4 m-2" onclick="javascript:window.history.back();">Enrere</button>
-					<button id="editaBtn" type="button" class="btn btn-secondary px-4 m-2 d-none" onclick="edita()">Edita</button>
+					<button id="enrereBtn" type="button" class="btn btn-primary px-4 m-2" onclick="javascript:window.history.back();">Enrere</button>
+					<button id="editaBtn" type="button" class="btn btn-primary px-4 m-2 d-none" onclick="edita()">Edita</button>
 				</div>
 				<div class="col-md-4 text-center">
 					<button id="continuarBtn" type="button" class="btn btn-primary px-4 m-2" onclick="validacion()">Continuar</button>
@@ -496,6 +513,7 @@ $fecha = $_POST['fecha']; */
 
 	<!-- JavaScript Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
 	<script>
 		//prevenir que se envie el formulario si se presiona enter
 		document.querySelector('form').onkeypress = checkEnter;
@@ -511,7 +529,6 @@ $fecha = $_POST['fecha']; */
 		var resumen = document.getElementById("resumen");
 		var ocultarForm = document.getElementById("ocultarForm");
 
-		var alertError = document.getElementById("alert-error");
 		var gestioInternaError = document.getElementById("gestioInterna-error");
 		var recercaError = document.getElementById("recerca-error");
 		var appError = document.getElementById("app-error");
@@ -606,12 +623,27 @@ $fecha = $_POST['fecha']; */
 			enrereBtn.classList.remove("d-none");
 		}
 
+
+
+
+			var options = {
+				animation: true,
+				delay: 5000
+			};
+			var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+			var toastList = toastElList.map(function(toastEl) {
+				return new bootstrap.Toast(toastEl, options)
+			})
+			
+
+
+
+
 		//validacion formulario
 
 		function validacion() {
 
 			var telValidacio = tel.value.length < 5 || (tel.value.length > 5 && tel.value.length < 9) || tel.value.length > 9;
-			var emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 
 			peticio.forEach((item) => {
 				if (item.checked) {
@@ -623,7 +655,7 @@ $fecha = $_POST['fecha']; */
 			if (!nomCognom.value) {
 				nomCognom.nextElementSibling.classList.remove("d-none");
 				nomCognom.classList.add("border-danger");
-				alertError.classList.remove("d-none");
+				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
@@ -631,12 +663,13 @@ $fecha = $_POST['fecha']; */
 			} else {
 				nomCognom.nextElementSibling.classList.add("d-none");
 				nomCognom.classList.remove("border-danger");
+				toastList[0].hide();
 			}
 
-			if (!email.value || !email.value.match(emailRegex)) {
+			if (!email.value) {
 				email.nextElementSibling.classList.remove("d-none");
 				email.classList.add("border-danger");
-				alertError.classList.remove("d-none");
+				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
@@ -644,12 +677,13 @@ $fecha = $_POST['fecha']; */
 			} else {
 				email.nextElementSibling.classList.add("d-none");
 				email.classList.remove("border-danger");
+				toastList[0].hide();
 			}
 
 			if (telValidacio) {
 				tel.nextElementSibling.classList.remove("d-none");
 				tel.classList.add("border-danger");
-				alertError.classList.remove("d-none");
+				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
@@ -657,12 +691,13 @@ $fecha = $_POST['fecha']; */
 			} else {
 				tel.nextElementSibling.classList.add("d-none");
 				tel.classList.remove("border-danger");
+				toastList[0].hide();
 			}
 
 			if (!centre.value) {
 				centre.nextElementSibling.classList.remove("d-none");
 				centre.classList.add("border-danger");
-				alertError.classList.remove("d-none");
+				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
@@ -670,12 +705,13 @@ $fecha = $_POST['fecha']; */
 			} else {
 				centre.nextElementSibling.classList.add("d-none");
 				centre.classList.remove("border-danger");
+				toastList[0].hide();
 			}
 
 			if (!servei.value) {
 				servei.nextElementSibling.classList.remove("d-none");
 				servei.classList.add("border-danger");
-				alertError.classList.remove("d-none");
+				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
@@ -683,12 +719,13 @@ $fecha = $_POST['fecha']; */
 			} else {
 				servei.nextElementSibling.classList.add("d-none");
 				servei.classList.remove("border-danger");
+				toastList[0].hide();
 			}
 
 			if (!periodicitat.value) {
 				periodicitat.nextElementSibling.classList.remove("d-none");
 				periodicitat.classList.add("border-danger");
-				alertError.classList.remove("d-none");
+				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
@@ -696,12 +733,13 @@ $fecha = $_POST['fecha']; */
 			} else {
 				periodicitat.nextElementSibling.classList.add("d-none");
 				periodicitat.classList.remove("border-danger");
+				toastList[0].hide();
 			}
 
 			if (!necessites.value) {
 				necessites.nextElementSibling.classList.remove("d-none");
 				necessites.classList.add("border-danger");
-				alertError.classList.remove("d-none");
+				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
@@ -709,12 +747,13 @@ $fecha = $_POST['fecha']; */
 			} else {
 				necessites.nextElementSibling.classList.add("d-none");
 				necessites.classList.remove("border-danger");
+				toastList[0].hide();
 			}
 
 			if (!camps.value) {
 				camps.nextElementSibling.classList.remove("d-none");
 				camps.classList.add("border-danger");
-				alertError.classList.remove("d-none");
+				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
@@ -722,12 +761,13 @@ $fecha = $_POST['fecha']; */
 			} else {
 				camps.nextElementSibling.classList.add("d-none");
 				camps.classList.remove("border-danger");
+				toastList[0].hide();
 			}
 
 			if (!filtres.value) {
 				filtres.nextElementSibling.classList.remove("d-none");
 				filtres.classList.add("border-danger");
-				alertError.classList.remove("d-none");
+				toastList[0].show();
 				window.scrollTo({
 					top: 0,
 					behavior: 'smooth'
@@ -735,6 +775,7 @@ $fecha = $_POST['fecha']; */
 			} else {
 				filtres.nextElementSibling.classList.add("d-none");
 				filtres.classList.remove("border-danger");
+				toastList[0].hide();
 			}
 
 			app.forEach((item) => {
@@ -742,10 +783,11 @@ $fecha = $_POST['fecha']; */
 					appError.classList.add("d-none");
 					appValueArray.push(item.value);
 					appValid = true;
+					toastList[0].hide();
 				}
 				if (!item.checked) {
 					appError.classList.remove("d-none");
-					alertError.classList.remove("d-none");
+					toastList[0].show();
 					window.scrollTo({
 						top: 0,
 						behavior: 'smooth'
@@ -757,7 +799,7 @@ $fecha = $_POST['fecha']; */
 				if (!justificacio.value) {
 					gestioInternaError.classList.remove("d-none");
 					justificacio.classList.add("border-danger");
-					alertError.classList.remove("d-none");
+					toastList[0].show();
 					window.scrollTo({
 						top: 0,
 						behavior: 'smooth'
@@ -765,24 +807,25 @@ $fecha = $_POST['fecha']; */
 				} else {
 					gestioInternaError.classList.add("d-none");
 					justificacio.classList.remove("border-danger");
+					toastList[0].hide();
 				}
 
-				if (email.value && email.value.match(emailRegex) && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && justificacio.value && appValid) {
+				if (email.value && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && justificacio.value && appValid) {
 					resumen.classList.remove("d-none");
 					editaBtn.classList.remove("d-none");
 					enviarBtn.classList.remove("d-none");
 					ocultarForm.classList.add("d-none");
 					continuarBtn.classList.add("d-none");
 					enrereBtn.classList.add("d-none");
-					alertError.classList.add("d-none");
 					appError.classList.add("d-none");
+					toastList[0].hide();
 				}
 			}
 			if (recerca.checked) {
 				if (!per.value) {
 					gestioInternaError.classList.remove("d-none");
 					per.classList.add("border-danger");
-					alertError.classList.remove("d-none");
+					toastList[0].show();
 					window.scrollTo({
 						top: 0,
 						behavior: 'smooth'
@@ -790,12 +833,13 @@ $fecha = $_POST['fecha']; */
 				} else {
 					gestioInternaError.classList.add("d-none");
 					per.classList.remove("border-danger");
+					toastList[0].hide();
 				}
 
 				if (!publicar.value) {
 					publicar.nextElementSibling.classList.remove("d-none");
 					publicar.classList.add("border-danger");
-					alertError.classList.remove("d-none");
+					toastList[0].show();
 					window.scrollTo({
 						top: 0,
 						behavior: 'smooth'
@@ -803,12 +847,13 @@ $fecha = $_POST['fecha']; */
 				} else {
 					publicar.nextElementSibling.classList.add("d-none");
 					publicar.classList.remove("border-danger");
+					toastList[0].hide();
 				}
 
 				if (!fecha.value) {
 					fecha.nextElementSibling.classList.remove("d-none");
 					fecha.classList.add("border-danger");
-					alertError.classList.remove("d-none");
+					toastList[0].show();
 					window.scrollTo({
 						top: 0,
 						behavior: 'smooth'
@@ -816,17 +861,18 @@ $fecha = $_POST['fecha']; */
 				} else {
 					fecha.nextElementSibling.classList.add("d-none");
 					fecha.classList.remove("border-danger");
+					toastList[0].hide();
 				}
 
-				if (email.value && email.value.match(emailRegex) && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && per.value && publicar.value && fecha.value && appValid) {
+				if (email.value && nomCognom.value && !telValidacio && centre.value && servei.value && periodicitat.value && necessites.value && camps.value && filtres.value && per.value && publicar.value && fecha.value && appValid) {
 					resumen.classList.remove("d-none");
 					editaBtn.classList.remove("d-none");
 					enviarBtn.classList.remove("d-none");
 					ocultarForm.classList.add("d-none");
 					continuarBtn.classList.add("d-none");
 					enrereBtn.classList.add("d-none");
-					alertError.classList.add("d-none");
 					appError.classList.add("d-none");
+					toastList[0].hide();
 				}
 			}
 
